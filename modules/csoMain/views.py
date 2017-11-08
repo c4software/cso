@@ -1,9 +1,13 @@
-from flask import render_template, Blueprint, redirect, request, session, Response
-import ldap
+"""
+This module manage all of the login / logout user workflow
+"""
+
 import json
 import hashlib
 import base64
 import time
+from flask import render_template, Blueprint, redirect, request, session, Response
+import ldap
 from models import Application, UserDroit
 from parameters import default_website, ldap_server, ldap_dn
 
