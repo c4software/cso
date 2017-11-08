@@ -10,6 +10,10 @@ Legacy app i’ve built long time ago… Not perfect but running 24/7 since a lo
 pip install -r requirements.txt
 ```
 
+## Workflow (login process)
+
+Todo
+
 ## Run (in dev)
 
 ```shell
