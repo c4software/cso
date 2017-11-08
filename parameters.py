@@ -1,4 +1,4 @@
-default_website = "http://www.afone.com"
+default_website = "http://brosseau.ovh"
 
 ldap_server = "ldap://10.40.45.41"
 ldap_dn 	= "uid={0},ou=Users,dc=it,dc=afone,dc=fr"
