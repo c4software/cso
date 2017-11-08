@@ -6,7 +6,7 @@
 pip install -r requirements.txt
 ```
 
-## Run
+## Run (in dev)
 
 ```shell
 python main.py
