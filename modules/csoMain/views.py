@@ -10,32 +10,23 @@ from parameters import default_website, ldap_server, ldap_dn
 
 csoMain = Blueprint('csoMain', __name__, template_folder='templates')
 
-"""
-Recuperation de la clef en bdd
-"""
-def getAppKey(appName):
+def get_app_key(appName):
+    """
+    Recuperation de la clef en bdd
+    """
     app = Application.query.filter(Application.nom == appName).first()
     if app is not None:
         return app.key
     else:
         return None
-"""
-    Envoi d'un header d'authentification
-"""
-def http_authenticate():
-    """Sends a 401 response that enables basic auth"""
-    return Response('Could not verify your access level for that URL.\n'
-                    'You have to login with proper credentials', 401,
-                    {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
-
-"""
-    Gestion du login LDAP
-"""
 def ldap_login(username, password, key):
-    l = ldap.initialize(ldap_server)
-    l.simple_bind_s(ldap_dn.format(username), password)
-    l.unbind_s()
+    """
+        Gestion du login LDAP
+    """
+    ldap_connector = ldap.initialize(ldap_server)
+    ldap_connector.simple_bind_s(ldap_dn.format(username), password)
+    ldap_connector.unbind_s()
 
     # Recuperation des infos utilisateurs en BDD
     user = UserDroit.query.filter(UserDroit.username == username).first()
@@ -45,19 +36,18 @@ def ldap_login(username, password, key):
         return_value = {"username": username, "group": user.group, "level": user.level, "key": '', "timeToken": ""}
 
     # Calcul du hash de la clef
-    json_value, signature = signedTab(return_value, key)
+    json_value, signature = signed_tab(return_value, key)
     b64_json_value = base64.b64encode(json_value)
 
-    # On stock en Cookie + Session le fait que l'utilisateur soit connecte, pour les futures demande de login
+    # On stock en Cookie + Session le fait que l'utilisateur soit connecte, 
+    # pour les futures demande de login
     session['username'] = username
     session['values'] = json_value
 
     return (b64_json_value, signature)
 
-"""
-Calcul de la signature de l'array
-"""
-def signedTab(tab, key):
+def signed_tab(tab, key):
+    """Calcul de la signature de l'array"""
     tab['timeToken'] = int(time.time())
     tab['key'] = key
     # Calcul de la signature de l element pour la securite
@@ -66,7 +56,7 @@ def signedTab(tab, key):
     # On supprime la clef car elle est secrete entre le CSO et l'application.
     # Elle est utile pour verifier que l'array n'a pas ete modifie
     tab["key"] = ""
- 
+
     # Conversion de l'array en JSON
     jsonValues = json.dumps(tab, separators=(',', ':'))
 
@@ -74,76 +64,49 @@ def signedTab(tab, key):
 
 @csoMain.route("/")
 def main():
-    return redirect(default_website)
+    """ Nothing on / """
+    return ""
 
 @csoMain.route("/login")
 def login():
+    """
+    This function ask the user for his login / password 
+    or redirect to the requested page if already login
+    """
+
     next = request.args.get('next', "")
     apps = request.args.get('apps', "default")
-    errorMessage = session.get('error', '')
+    error_message = session.get('error', '')
 
     session.pop('error', None)
 
     # Si la personne est connecte alors ==> On redirige.
     if "username" in session:
         # Recuperation des valeurs de login
-        jsonValues = session['values']
-        values = json.loads(jsonValues)
+        json_value = session['values']
+        values = json.loads(json_value)
 
         # recuperation de la clef
-        key = getAppKey(apps)
+        key = get_app_key(apps)
 
         # Calcul de la signature et preparation de l'array pour le mettre dans le POST
-        jsonValues, signature = signedTab(values, key)
+        json_value, signature = signed_tab(values, key)
 
         # Calcul de la base64 de l'arrayJson
-        b64jsonValues = base64.b64encode(jsonValues)
-        return render_template("redirection.html", next=next, apps=apps, values=b64jsonValues, signature=signature)
-    
-    return render_template("login.html", next=next, apps=apps, error=errorMessage)
+        b64_json_value = base64.b64encode(json_value)
+        return render_template("redirection.html",
+                               next=next,
+                               apps=apps,
+                               values=b64_json_value,
+                               signature=signature)
 
-@csoMain.route('/login_http')
-def http_login():
-    next = request.args.get('next', "")
-    apps = request.args.get('apps', "default")
-
-    # Recuperation de la clef de signature
-    key = getAppKey(apps)
-    if key is None:
-        return redirect(default_website)
-
-    if "username" in session:
-        # Recuperation des valeurs de login
-        jsonValues = session['values']
-        values = json.loads(jsonValues)
-
-        # recuperation de la clef
-        key = getAppKey(apps)
-
-        # Calcul de la signature et preparation de l'array pour le mettre dans le POST
-        jsonValues, signature = signedTab(values, key)
-
-        # Calcul de la base64 de l'arrayJson
-        b64jsonValues = base64.b64encode(jsonValues)
-
-        return redirect(next+"?values="+b64jsonValues+"&signature="+signature)
-    else:
-        # L'utilisateur n'est pas connu en session, on le log avec les id qu'il va fournir
-        auth = request.authorization
-        if not auth:
-            return http_authenticate()
-        else:
-            try:
-                b64jsonValues, signature = ldap_login(auth.username, auth.password, key)
-                return redirect(next+"?values="+b64jsonValues+"&signature="+signature)
-                # Login OK.
-            except:
-                # Login NOK
-                return http_authenticate()
-
+    return render_template("login.html", next=next, apps=apps, error=error_message)
 
 @csoMain.route("/doLogin",methods=['POST','GET'])
 def process_login():
+    """
+    Process the login request. 
+    """
     next = request.form.get('next', "")
     apps = request.form.get('apps', "default")
 
@@ -151,31 +114,39 @@ def process_login():
     password = request.form.get('password', '')
 
     # Recuperation de la clef de l'application en base de donnees
-    key = getAppKey(apps)
+    key = get_app_key(apps)
     if key is None:
         # Si la clef est inconnu on Abort
         session['error'] = "Application inconnue"
         return redirect('/login?next='+next+"&apps="+apps)
 
     # Tentative d'authentification sur la LDAP
-    returnValue = {}
-
     try:
-        b64jsonValues, signature = ldap_login(username, password, key)
-        return render_template("redirection.html", next=next, apps=apps, values=b64jsonValues, signature=signature)
-    except:
+        b64_json_value, signature = ldap_login(username, password, key)
+        return render_template("redirection.html",
+                               next=next, apps=apps,
+                               values=b64_json_value,
+                               signature=signature)
+                              
+    except Exception as e:
         session['error'] = "Login / Mot de passe incorrect"
 
     return redirect('/login?next='+next+"&apps="+apps)
 
 @csoMain.route("/error" ,methods=['POST','GET'])
 def error():
+    """
+    Generic message for the user
+    """
     message = request.args.get('message', "Vous ne disposez pas des droits suffisants.")
-    next = request.args.get('next', default_website)
-    return render_template("error.html", message=message, next=next)
+    next_page = request.args.get('next', default_website)
+    return render_template("error.html", message=message, next=next_page)
 
 @csoMain.route("/islogin" ,methods=['GET'])
-def islogin():
+def is_login():
+    """
+    Test if user is currently logged-in (and use jsonp to use avoid CORS)
+    """
     callback = request.args.get('callback', "callback")
     if "username" in session:
         resp = callback+"({\"data\":true})"
@@ -186,21 +157,30 @@ def islogin():
 
 @csoMain.route("/logout" ,methods=['POST','GET'])
 def logout():
-    next = request.args.get('next', "")
+    """
+    Display the logout request to the user
+    """
+    next_page = request.args.get('next', "")
     if "username" not in session:
-        return redirect(next)
+        return redirect(next_page)
     else:
-        return render_template("logout.html", next=next)
+        return render_template("logout.html", next=next_page)
 
 @csoMain.route("/logoutApps" ,methods=['POST','GET'])
-def logoutApps():
-    next = request.form.get('next', "")
-    return redirect(next)
+def logout_apps():
+    """
+    Just redirect to the disconnet url of the initial request (SEssion is untouched)
+    """
+    next_page = request.form.get('next', "")
+    return redirect(next_page)
 
 @csoMain.route("/logoutAll" ,methods=['POST','GET'])
-def logoutAll():
-    next = request.form.get('next',"")
+def logout_all():
+    """
+    Remove local session. And redirect to the initial request
+    """
+    next_page = request.form.get('next', "")
     session.pop('username', None)
     session.pop('values', None)
     session.pop('signature', None)
-    return redirect(next)
+    return redirect(next_page)
