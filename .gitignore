@@ -138,6 +138,3 @@ venv.bak/
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
-
-
-database/CSO.db
