@@ -35,25 +35,24 @@ def http_authenticate():
 def ldap_login(username, password, key):
     l = ldap.initialize(ldap_server)
     l.simple_bind_s(ldap_dn.format(username), password)
-    print l.search_s(ldap_dn.format(username), ldap.SCOPE_SUBTREE, '(objectClass=*)')
     l.unbind_s()
 
     # Recuperation des infos utilisateurs en BDD
     user = UserDroit.query.filter(UserDroit.username == username).first()
     if user is None:
-        returnValue = {"username": username, "group": "users", "level": 0, "key": '', "timeToken": ""}
+        return_value = {"username": username, "group": "users", "level": 0, "key": '', "timeToken": ""}
     else:
-        returnValue = {"username": username, "group": user.group, "level": user.level, "key": '', "timeToken": ""}
+        return_value = {"username": username, "group": user.group, "level": user.level, "key": '', "timeToken": ""}
 
     # Calcul du hash de la clef
-    jsonValues, signature = signedTab(returnValue, key)
-    b64jsonValues = base64.b64encode(jsonValues)
+    json_value, signature = signedTab(return_value, key)
+    b64_json_value = base64.b64encode(json_value)
 
     # On stock en Cookie + Session le fait que l'utilisateur soit connecte, pour les futures demande de login
     session['username'] = username
-    session['values'] = jsonValues
+    session['values'] = json_value
 
-    return (b64jsonValues, signature)
+    return (b64_json_value, signature)
 
 """
 Calcul de la signature de l'array
