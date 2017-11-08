@@ -2,7 +2,7 @@ from flask import render_template, Blueprint, redirect, request, url_for
 from modules.csoGestion.tools.login import login_required, do_login, do_logout
 from modules.csoGestion.tools.generic import get_tbl_object, get_listing_redirection
 
-from models import Group, UserDroit, Application
+from models import UserDroit, Application
 from database import db_session
 
 csoGestion = Blueprint('csoGestion', __name__, template_folder='templates')
