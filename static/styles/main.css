@@ -34,6 +34,7 @@ h1:first-letter {
 	overflow: hidden;
 	padding: 11px 20px;
 	background-color:#ffffff;
+	height: 100%;
 }
 
 #content #contentTitle{
