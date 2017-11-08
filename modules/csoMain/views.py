@@ -11,7 +11,6 @@ import ldap
 from models import Application, UserDroit
 from parameters import default_website, ldap_server, ldap_dn
 
-
 csoMain = Blueprint('csoMain', __name__, template_folder='templates')
 
 def get_app_key(appName):
