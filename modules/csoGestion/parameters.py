@@ -1,0 +1,1 @@
+login_url = "/login?apps=admin&next=/admin/login"

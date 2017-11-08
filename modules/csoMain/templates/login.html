@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form action="/doLogin" method="post">
+<div id='centerBox'>
+	{% if error != "" %}
+		<div class='message info'>{{error}}</div>
+	{% endif %}
+	<p>
+		<label>Utilisateur :</label>
+		<br />
+		<input name='username' type='text' class='full' value='' placeholder='Utilisateur' />
+	</p>
+	<p>
+		<label>Mot de passe :</label>
+		<br />
+		<input name='password' type='password' class='full' value='' placeholder='Mot de passe' />
+	</p>
+
+	<p class='bottom'>
+		<input type='submit' class='btn large primary' value="Connexion" />
+		<input type='hidden' name='next' value='{{next}}' />
+		<input type='hidden' name='apps' value='{{apps}}' />
+	</p>
+</div>
+</form>
+{% endblock %}

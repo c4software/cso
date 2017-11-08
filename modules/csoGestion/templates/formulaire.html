@@ -1,0 +1,33 @@
+{% extends "layoutWithMenu.html" %}
+
+{% block body %}
+
+<h1>{{action}}</h1>
+<br />
+<div style='margin-left:20px'>
+	<form action="/admin/{{action}}/save" method='POST'>
+		<div style='padding:10px;' >
+			{% for header in headers %}
+			<div class='etiquette' >{{header}}</div>
+				{% if actionType == "Modifier" %}
+					<div>
+						{% if key == header %}
+							<input type='hidden' value='{{object[header]}}' name='{{header}}' />
+							{{object[header]}}
+						{% else %}
+							<input type='text' value='{{object[header]}}' name='{{header}}' />
+						{% endif %}
+					</div>
+				{% else %}
+					<div><input type='text' value='' name='{{header}}' /></div>
+				{% endif %}
+			<br />
+			{% endfor %}
+
+			<div class='etiquette' >&nbsp;</div>
+			<div><input type='submit' class='btn' value='{{actionType}}' /></div>
+		</div>
+	</form>
+</div>
+
+{% endblock %}

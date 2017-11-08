@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+	<div id='centerBox' style='padding-bottom:20px;'>
+		<div class='center'>
+			<form action="/logoutApps" id='continuBox' method="post">
+				<input type='submit' class='btn large primary' value="D&eacute;connexion de l'application" />
+				<input type='hidden' name='next' value='{{next}}' />
+			</form>
+			<br />
+			<form action="/logoutAll" id='continuBox' method="post">
+				<input type='submit' class='btn large danger' value="D&eacute;connexion de tous les services" />
+				<input type='hidden' name='next' value='{{next}}' />
+			</form>
+		</div>
+	</div>
+</form>
+{% endblock %}

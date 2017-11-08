@@ -1,0 +1,31 @@
+{% extends "layoutWithMenu.html" %}
+
+{% block body %}
+
+<div class='etiquette' style='width:250px;'>Action sur '{{action}}'</div><div><a href='/admin/{{action}}/add' class='btn info'>Ajouter</a></div>
+<br />
+
+<table>
+	<thead>
+		<tr>
+			<th style='width:214px'>Actions</th>
+			{% for header in headers %}
+			<th>{{header}}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for items in list %}
+		<tr>
+			<td>
+				<a href='/admin/{{action}}/get/{{items[key]}}' class='btn info'>Modification</a>
+				<a href='/admin/{{action}}/remove/{{items[key]}}/confirm' class='btn danger'>Suppression</a>
+			</td>
+			{% for header in headers %}
+			<td>{{items[header]}}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}	
+	</tbody>
+</table>
+{% endblock %}

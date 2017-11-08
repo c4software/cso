@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form action="{{next}}" id='continuBox' method="post">
+	<input type='hidden' value='{{signature}}' name='signature' />
+	<input type='hidden' value='{{values}}' name='values' />
+	<div id='centerBox'>
+		<p class='center'>
+			<img src='/static/images/loader.gif' />
+			<br /><br />
+			<label>Redirection vers "{{apps}}" en cours...</label>
+		</p>
+	</div>
+</form>
+
+<script type="text/javascript"> 
+window.onload = init; 
+
+function init()
+{
+	document.getElementById('continuBox').submit();
+}
+</script>
+
+{% endblock %}
