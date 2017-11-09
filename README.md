@@ -4,6 +4,17 @@ CSO is a simple Centralized Sign-on. Manage your user login (user and group) wit
 
 ✋ Legacy app i’ve built long time ago… Not perfect but running 24/7 since a looooong time…
 
+- LDAP Auth.
+- Timebased OTP for user (WIP)
+
+## WIP
+
+- Rewrite login (CSOMain module).
+- Secret Administration (OTP):
+    - Generate.
+    - Update.
+    - Share via QRCode.
+
 ## Installation
 
 ```shell
