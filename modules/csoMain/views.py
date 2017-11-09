@@ -6,6 +6,7 @@ import json
 import hashlib
 import base64
 import time
+import pyotp
 from flask import render_template, Blueprint, redirect, request, session, Response
 import ldap
 from models import Application, UserDroit
@@ -64,6 +65,16 @@ def signed_tab(tab, key):
     jsonValues = json.dumps(tab, separators=(',', ':'))
 
     return (jsonValues, signature)
+
+def check_totp(code):
+    current_user = session['username']
+    user = UserDroit.query.filter(UserDroit.username == current_user).first()
+    if user.secret:
+        totp = pyotp.TOTP(user.secret)
+        return totp.verify(code)
+    else:
+        return True
+
 
 @csoMain.route("/")
 def main():
