@@ -110,30 +110,34 @@ def login():
 
     # Si la personne est connecte alors ==> On redirige.
     if "username" in session:
-        # Recuperation des valeurs de login
+        # Get the login values in session
         json_value = session['values']
         values = json.loads(json_value)
 
-        # recuperation de la clef
+        # Get the key in databases
         key = get_app_key(apps)
 
-        # Calcul de la signature et preparation de l'array pour le mettre dans le POST
+        # Calculate the signatur and prepare the data to create the POST values
         json_value, signature = signed_tab(values, key)
 
-        # Calcul de la base64 de l'arrayJson
+        # Calculate the base64 representation to transmit safely
         b64_json_value = base64.b64encode(json_value)
         return render_template("redirection.html",
                                next=next,
                                apps=apps,
                                values=b64_json_value,
                                signature=signature)
-
-    return render_template("login.html", next=next, apps=apps, error=error_message)
+    else:
+        # User not logged, display the login page.
+        return render_template("login.html",
+                               next=next,
+                               apps=apps,
+                               error=error_message)
 
 @csoMain.route("/doLogin",methods=['POST','GET'])
 def process_login():
     """
-    Process the login request. 
+    Process the login request.
     """
     next = request.form.get('next', "")
     apps = request.form.get('apps', "default")
