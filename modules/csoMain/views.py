@@ -67,13 +67,27 @@ def signed_tab(tab, key):
     return (jsonValues, signature)
 
 def check_totp(code):
-    current_user = session['username']
-    user = UserDroit.query.filter(UserDroit.username == current_user).first()
-    if user.secret:
-        totp = pyotp.TOTP(user.secret)
-        return totp.verify(code)
+    """
+    Validate / check OTP.
+    - If the TOTP is present in database (secret) check if provided code is valide.
+    - If user exist and no OTP continue.
+    """
+    if "username" in session:
+        # Find the user in database.
+        user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
+
+        if user and user.secret:
+            # If User exist and has a secret
+            totp = pyotp.TOTP(user.secret)
+            return totp.verify(code)
+        elif not user:
+            # User not exist
+            return False
+        else:
+            # User exist and don't have any secret
+            return True
     else:
-        return True
+        return False
 
 
 @csoMain.route("/")
