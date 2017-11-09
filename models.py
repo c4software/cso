@@ -7,14 +7,16 @@ class UserDroit(Base):
     username = Column(String(200), primary_key=True)
     group = Column(Text)
     level = Column(Integer)
+    secret = Column(Text)
 
     header = ['username', 'group', 'level']
     primary_key = 'username'
 
-    def __init__(self, username=None, group="", level=0):
+    def __init__(self, username=None, group="", level=0, secret=""):
         self.username = username
         self.group = group
         self.level = level
+        self.secret = secret
 
     def __repr__(self):
         return '<UserDroit %r>' % (self.username)
