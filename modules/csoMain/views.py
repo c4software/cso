@@ -14,20 +14,21 @@ from parameters import default_website, ldap_server, ldap_dn
 
 csoMain = Blueprint('csoMain', __name__, template_folder='templates')
 
-def get_app_key(appName):
+def get_app_key(app_name):
     """
     Recuperation de la clef en bdd
     """
-    app = Application.query.filter(Application.nom == appName).first()
+    app = Application.query.filter(Application.nom == app_name).first()
     if app is not None:
         return app.key
     else:
         return None
 
-def ldap_login(username, password, key):
+def ldap_login(username, password, apps):
     """
         Gestion du login LDAP
     """
+    key = get_app_key(apps)
     ldap_connector = ldap.initialize(ldap_server)
     ldap_connector.simple_bind_s(ldap_dn.format(username), password)
     ldap_connector.unbind_s()
@@ -98,15 +99,13 @@ def main():
 @csoMain.route("/login")
 def login():
     """
-    This function ask the user for his login / password 
+    This function ask the user for his login / password
     or redirect to the requested page if already login
     """
 
     next = request.args.get('next', "")
     apps = request.args.get('apps', "default")
-    error_message = session.get('error', '')
-
-    session.pop('error', None)
+    error_message = session.pop('error', "")
 
     # Si la personne est connecte alors ==> On redirige.
     if "username" in session:
@@ -118,8 +117,7 @@ def login():
         key = get_app_key(apps)
         if key is None:
             # Application key unknown. Abort the request
-            session['error'] = "Application inconnue"
-            return redirect('/login?next='+next+"&apps="+apps)
+            return redirect('/error')
 
         # Calculate the signatur and prepare the data to create the POST values
         json_value, signature = signed_tab(values, key)
@@ -149,23 +147,13 @@ def process_login():
     username = request.form.get('username', '')
     password = request.form.get('password', '')
 
-    # Recuperation de la clef de l'application en base de donnees
-    key = get_app_key(apps)
-    if key is None:
-        # Si la clef est inconnu on Abort
-        session['error'] = "Application inconnue"
-        return redirect('/login?next='+next+"&apps="+apps)
-
-    # Tentative d'authentification sur la LDAP
-    try:
-        b64_json_value, signature = ldap_login(username, password, key)
-        return render_template("redirection.html",
-                               next=next, apps=apps,
-                               values=b64_json_value,
-                               signature=signature)
-                              
-    except Exception as e:
-        session['error'] = "Login / Mot de passe incorrect"
+    # If username and password is present
+    if username and password:
+        # Bind the user
+        try:
+            ldap_login(username, password, apps)
+        except Exception as e:
+            return redirect('/error')
 
     return redirect('/login?next='+next+"&apps="+apps)
 
