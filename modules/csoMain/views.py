@@ -116,6 +116,10 @@ def login():
 
         # Get the key in databases
         key = get_app_key(apps)
+        if key is None:
+            # Application key unknown. Abort the request
+            session['error'] = "Application inconnue"
+            return redirect('/login?next='+next+"&apps="+apps)
 
         # Calculate the signatur and prepare the data to create the POST values
         json_value, signature = signed_tab(values, key)
