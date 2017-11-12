@@ -2,6 +2,7 @@
 
 {% block body %}
 <form action="{{next}}" id='continuBox' method="post">
+	<input name=_csrf_token type=hidden value="{{ csrf_token() }}">
 	<input type='hidden' value='{{signature}}' name='signature' />
 	<input type='hidden' value='{{values}}' name='values' />
 	<div id='centerBox'>

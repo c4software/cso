@@ -8,7 +8,7 @@ from modules.csoMain.views import csoMain
 from modules.csoGestion.views import csoGestion
 
 app = Flask(__name__)
-app.secret_key = "TEST" #uuid.uuid4().hex
+app.secret_key = "9jHy6lAOxBKzhbY3eeGRB1i5pbnqgA58XDm07xXTPxfZUzcPq9r7+SKYJseosjMF6lk=" #uuid.uuid4().hex
 
 #register des modules
 app.register_blueprint(csoMain)
@@ -17,12 +17,11 @@ app.register_blueprint(csoGestion, url_prefix='/admin')
 @app.before_request
 def csrf_protect():
     """
-    Test if CSRF if request is POST and if previous CSRF is present in the SESSION.
-    If its the case, test if the value is correct
+    Test if CSRF if request is POST and if CSRF is matching
     """
     if request.method == "POST":
         token = session.pop('_csrf_token', None)
-        if token != None and token != request.form.get('_csrf_token'):
+        if not token or token != request.form.get('_csrf_token'):
             abort(403)
 
 def generate_csrf_token():

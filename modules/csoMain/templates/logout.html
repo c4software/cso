@@ -1,18 +1,22 @@
 {% extends "layout.html" %}
 
 {% block body %}
-	<div id='centerBox' style='padding-bottom:20px;'>
+<div id='centerBox' style='padding-bottom:20px;'>
+	<form action="" id='continuBox' method="post">
+		<input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+		<input type='hidden' name='next' value='{{next}}' />
 		<div class='center'>
-			<form action="/logoutApps" id='continuBox' method="post">
-				<input type='submit' class='btn large primary' value="D&eacute;connexion de l'application" />
-				<input type='hidden' name='next' value='{{next}}' />
-			</form>
-			<br />
-			<form action="/logoutAll" id='continuBox' method="post">
-				<input type='submit' class='btn large danger' value="D&eacute;connexion de tous les services" />
-				<input type='hidden' name='next' value='{{next}}' />
-			</form>
+			<input type='button' class='btn large primary' onclick="doAction('/logoutApps')" value="D&eacute;connexion de l'application" />
+			<br><br>
+			<input type='button' class='btn large danger' onclick="doAction('/logoutAll')" value="D&eacute;connexion de tous les services" />
 		</div>
-	</div>
-</form>
+	</form>
+
+	<script>
+		function doAction(action){
+			document.getElementById("continuBox").action = action;
+			document.getElementById("continuBox").submit();
+		}
+	</script>
+</div>
 {% endblock %}
