@@ -63,9 +63,9 @@ def signed_tab(tab, key):
     tab["key"] = ""
 
     # Conversion de l'array en JSON
-    jsonValues = json.dumps(tab, separators=(',', ':'))
+    json_value = json.dumps(tab, separators=(',', ':'))
 
-    return (jsonValues, signature)
+    return (json_value, signature)
 
 def check_totp(code):
     """
@@ -136,7 +136,7 @@ def login():
                                apps=apps,
                                error=error_message)
 
-@csoMain.route("/doLogin",methods=['POST','GET'])
+@csoMain.route("/doLogin", methods=['POST','GET'])
 def process_login():
     """
     Process the login request.
@@ -157,7 +157,7 @@ def process_login():
 
     return redirect('/login?next='+next_page+"&apps="+apps)
 
-@csoMain.route("/error" ,methods=['POST','GET'])
+@csoMain.route("/error", methods=['POST', 'GET'])
 def error():
     """
     Generic message for the user
@@ -166,7 +166,7 @@ def error():
     next_page = request.args.get('next', default_website)
     return render_template("error.html", message=message, next=next_page)
 
-@csoMain.route("/islogin" ,methods=['GET'])
+@csoMain.route("/islogin", methods=['GET'])
 def is_login():
     """
     Test if user is currently logged-in (and use jsonp to use avoid CORS)
@@ -179,7 +179,7 @@ def is_login():
 
     return Response(response=resp, status=200, mimetype="application/javascript")
 
-@csoMain.route("/logout" ,methods=['POST','GET'])
+@csoMain.route("/logout", methods=['POST', 'GET'])
 def logout():
     """
     Display the logout request to the user
@@ -190,7 +190,7 @@ def logout():
     else:
         return render_template("logout.html", next=next_page)
 
-@csoMain.route("/logoutApps" ,methods=['POST','GET'])
+@csoMain.route("/logoutApps", methods=['POST', 'GET'])
 def logout_apps():
     """
     Just redirect to the disconnet url of the initial request (SEssion is untouched)
@@ -198,7 +198,7 @@ def logout_apps():
     next_page = request.form.get('next', "")
     return redirect(next_page)
 
-@csoMain.route("/logoutAll" ,methods=['POST','GET'])
+@csoMain.route("/logoutAll", methods=['POST', 'GET'])
 def logout_all():
     """
     Remove local session. And redirect to the initial request
