@@ -6,6 +6,7 @@
 <br />
 <div style='margin-left:20px'>
 	<form action="/admin/{{action}}/save" method='POST'>
+		<input name=_csrf_token type=hidden value="{{ csrf_token() }}">	
 		<div style='padding:10px;' >
 			{% for header in headers %}
 			<div class='etiquette' >{{header}}</div>
