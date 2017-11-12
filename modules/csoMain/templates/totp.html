@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form action="/login?next={{next}}&apps={{apps}}" method="post">
+	<input name=_csrf_token type=hidden value="{{ csrf_token() }}">	
+	<div id='centerBox'>
+		<p>
+			<label>Validation en deux étapes :</label>
+			<br />
+			<input name='totp' type='text' class='full' value='' placeholder='Saisir le code' />
+		</p>
+		<p class='bottom'>
+        <input type='submit' class='btn large primary' value="Connexion" />
+		</p>
+	</div>
+</form>
+{% endblock %}
