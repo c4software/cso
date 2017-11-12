@@ -1,9 +1,13 @@
+# -*- coding: utf-8 -*-
+
 from flask import render_template, Blueprint, redirect, request, url_for
 from modules.csoGestion.tools.login import login_required, do_login, do_logout
 from modules.csoGestion.tools.generic import get_tbl_object, get_listing_redirection
 
 from models import UserDroit, Application
 from database import db_session
+
+import pyotp
 
 csoGestion = Blueprint('csoGestion', __name__, template_folder='templates')
 
@@ -41,7 +45,30 @@ def list_secret():
     """
     List user with secret
     """
-    return None
+    user_secret = UserDroit.query.filter(UserDroit.secret != "").all()
+    print (user_secret)
+    return render_template('list.html',
+                           list={},
+                           headers={},
+                           action="secret",
+                           key="")
+
+@csoGestion.route("/secret/add")
+@login_required
+def add_secret():
+    post_value = request.form
+    if "username" not in post_value:
+       return render_template('formulaire.html', object={"qrcode_secret": pyotp.random_base32()}, headers=["username", "qrcode_secret"], action="secret", key="", actionType="Modifier")
+    else:
+        # Data in POST
+        current_user = UserDroit.query.filter(UserDroit.username == post_value["username"]).first()
+
+        if current_user:
+            # If the user is present in the database
+            current_user.secret = post_value["qrcode_secret"]
+            current_user.save()
+        return url_for("csoGestion.list_secret")
+
 
 @csoGestion.route("/<tbl_name>/list")
 @login_required

@@ -1,7 +1,6 @@
 {% extends "layoutWithMenu.html" %}
 
 {% block body %}
-
 <h1>{{action}}</h1>
 <br />
 <div style='margin-left:20px'>
@@ -15,6 +14,12 @@
 						{% if key == header %}
 							<input type='hidden' value='{{object[header]}}' name='{{header}}' />
 							{{object[header]}}
+						{% elif 'qrcode_' in header %}
+							<input type='hidden' value='{{object[header]}}' name='{{header}}' />
+							<div id="qrcode"></div>
+							<script>
+								new QRCode(document.getElementById("qrcode"), "{{object[header]}}");
+							</script>
 						{% else %}
 							<input type='text' value='{{object[header]}}' name='{{header}}' />
 						{% endif %}

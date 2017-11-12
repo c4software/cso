@@ -8,7 +8,7 @@ from modules.csoMain.views import csoMain
 from modules.csoGestion.views import csoGestion
 
 app = Flask(__name__)
-app.secret_key = uuid.uuid4().hex
+app.secret_key = "TEST" #uuid.uuid4().hex
 
 #register des modules
 app.register_blueprint(csoMain)
