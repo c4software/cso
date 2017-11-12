@@ -46,8 +46,8 @@ def list_secret():
     List user with secret
     """
     user_secret = UserDroit.query.filter(UserDroit.secret != "").all()
-    print (user_secret)
     return render_template('list.html',
+                           disable_remove=True,
                            list=user_secret,
                            headers=["username"],
                            action="secret",

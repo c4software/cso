@@ -2,13 +2,13 @@
 
 {% block body %}
 
-<div class='etiquette' style='width:250px;'>Action sur '{{action}}'</div><div><a href='/admin/{{action}}/add' class='btn info'>Ajouter</a></div>
+<div class='etiquette'>Action sur '{{action}}'</div><div><a href='/admin/{{action}}/add' class='btn info'>Ajouter</a></div>
 <br />
 
 <table>
 	<thead>
 		<tr>
-			<th style='width:214px'>Actions</th>
+			<th>Actions</th>
 			{% for header in headers %}
 			<th>{{header}}</th>
 			{% endfor %}
@@ -18,8 +18,8 @@
 		{% for items in list %}
 		<tr>
 			<td>
-				<a href='/admin/{{action}}/get/{{items[key]}}' class='btn info'>Modification</a>
-				<a href='/admin/{{action}}/remove/{{items[key]}}/confirm' class='btn danger'>Suppression</a>
+				{% if not disable_modification %}<a href='/admin/{{action}}/get/{{items[key]}}' class='btn info'>Modification</a>{% endif %}
+				{% if not disable_remove %}<a href='/admin/{{action}}/remove/{{items[key]}}/confirm' class='btn danger'>Suppression</a>{% endif %}
 			</td>
 			{% for header in headers %}
 			<td>{{items[header]}}</td>
