@@ -56,7 +56,7 @@ def list_secret():
 @csoGestion.route("/secret/add")
 @csoGestion.route("/secret/get/<username>")
 @login_required
-def add_secret(username):
+def add_secret(username=""):
     """
     Form to setup / add qrcode to user
     The secret will be modify each time the user show the qrcode (and submit the form)
