@@ -9,13 +9,14 @@ CSO is a simple Centralized Sign-on. Manage your user login (user and group) wit
 
 ## WIP
 
+- [ ] Fix bad CSRF Implementation.
 - [ ] Rewrite login (CSOMain module).
   - [ ] Implement TOPT during the login.
   - [ ] Add a max SESSION time
-- [ ] Secret Administration (OTP):
-  - [ ] Generate.
-  - [ ] Update.
-  - [ ] Share via QRCode.
+- [X] Secret Administration (OTP):
+  - [X] Generate.
+  - [X] Update.
+  - [X] Share via QRCode.
 
 ## Installation
 
