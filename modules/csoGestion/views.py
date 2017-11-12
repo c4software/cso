@@ -48,27 +48,40 @@ def list_secret():
     user_secret = UserDroit.query.filter(UserDroit.secret != "").all()
     print (user_secret)
     return render_template('list.html',
-                           list={},
-                           headers={},
+                           list=user_secret,
+                           headers=["username"],
                            action="secret",
-                           key="")
+                           key="username")
 
 @csoGestion.route("/secret/add")
+@csoGestion.route("/secret/get/<username>")
 @login_required
-def add_secret():
+def add_secret(username):
+    """
+    Form to setup / add qrcode to user
+    The secret will be modify each time the user show the qrcode (and submit the form)
+    """
+    return render_template('formulaire.html',
+                           object={"username": username, "qrcode_secret": pyotp.random_base32()},
+                           headers=["username", "qrcode_secret"],
+                           action="secret", key="",
+                           actionType="Modifier")
+
+@csoGestion.route("/secret/save", methods=['POST','GET'])
+@login_required
+def save_secret():
+    """
+    Save the new secret in the database
+    """
     post_value = request.form
-    if "username" not in post_value:
-       return render_template('formulaire.html', object={"qrcode_secret": pyotp.random_base32()}, headers=["username", "qrcode_secret"], action="secret", key="", actionType="Modifier")
-    else:
-        # Data in POST
-        current_user = UserDroit.query.filter(UserDroit.username == post_value["username"]).first()
+    current_user = UserDroit.query.filter(UserDroit.username == post_value["username"]).first()
+    if current_user:
+        # If the user is present in the database
+        current_user.secret = post_value["qrcode_secret"]
+        db_session.merge(current_user)
+        db_session.commit()
 
-        if current_user:
-            # If the user is present in the database
-            current_user.secret = post_value["qrcode_secret"]
-            current_user.save()
-        return url_for("csoGestion.list_secret")
-
+    return redirect(url_for("csoGestion.list_secret"))
 
 @csoGestion.route("/<tbl_name>/list")
 @login_required
@@ -79,7 +92,11 @@ def list_data(tbl_name):
     try:
         tbl_object = get_tbl_object(tbl_name)
         objects = tbl_object.query.all()
-        return render_template('list.html', list=objects, headers=tbl_object.header, action=tbl_name, key=tbl_object.primary_key)
+        return render_template('list.html',
+                               list=objects,
+                               headers=tbl_object.header,
+                               action=tbl_name,
+                               key=tbl_object.primary_key)
     except Exception as e:
         return redirect(url_for('csoGestion.index'))
 
@@ -91,7 +108,11 @@ def add(tbl_name):
     """
     try:
         tbl_object = get_tbl_object(tbl_name)
-        return render_template('formulaire.html', headers=tbl_object.header, action=tbl_name, key=tbl_object.primary_key, actionType="Ajouter")
+        return render_template('formulaire.html',
+                               headers=tbl_object.header,
+                               action=tbl_name,
+                               key=tbl_object.primary_key,
+                               actionType="Ajouter")
     except Exception as e:
         return redirect(url_for('csoGestion.index'))
 
@@ -104,7 +125,12 @@ def get(tbl_name, get_element):
     try:
         tbl_object = get_tbl_object(tbl_name)
         current = tbl_object.query.filter(tbl_object.primary_key+" == '"+get_element+"'").first()
-        return render_template('formulaire.html', headers=tbl_object.header, action=tbl_name, key=tbl_object.primary_key, actionType="Modifier", object=current)
+        return render_template('formulaire.html',
+                               headers=tbl_object.header,
+                               action=tbl_name,
+                               key=tbl_object.primary_key,
+                               actionType="Modifier",
+                               object=current)
     except Exception as e:
         return redirect(url_for('csoGestion.index'))
 

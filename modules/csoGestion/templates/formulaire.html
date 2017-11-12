@@ -18,7 +18,7 @@
 							<input type='hidden' value='{{object[header]}}' name='{{header}}' />
 							<div id="qrcode"></div>
 							<script>
-								new QRCode(document.getElementById("qrcode"), "{{object[header]}}");
+								new QRCode(document.getElementById("qrcode"), "otpauth://totp/CSO?secret={{object[header]}}&issuer=CSO");
 							</script>
 						{% else %}
 							<input type='text' value='{{object[header]}}' name='{{header}}' />
