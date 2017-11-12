@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<div class='etiquette'>Action sur '{{action}}'</div><div><a href='/admin/{{action}}/add' class='btn info'>Ajouter</a></div>
+<a href='/admin/{{action}}/add' class='btn info'>Ajouter</a>
 <br />
 
 <table>
@@ -25,7 +25,12 @@
 			<td>{{items[header]}}</td>
 			{% endfor %}
 		</tr>
-		{% endfor %}	
+		{% endfor %}
+		{% if not list %}
+		<tr>
+			<td colspan="2">Aucun « {{action}} »</td>
+		</tr>
+		{% endif %}	
 	</tbody>
 </table>
 {% endblock %}
