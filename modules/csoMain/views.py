@@ -44,7 +44,7 @@ def ldap_login(username, password, apps):
     json_value, signature = signed_tab(return_value, key)
     b64_json_value = base64.b64encode(json_value)
 
-    # On stock en Cookie + Session le fait que l'utilisateur soit connecte, 
+    # On stock en Cookie + Session le fait que l'utilisateur soit connecte,
     # pour les futures demande de login
     session['username'] = username
     session['values'] = json_value
@@ -103,7 +103,7 @@ def login():
     or redirect to the requested page if already login
     """
 
-    next = request.args.get('next', "")
+    next_page = request.args.get('next', "")
     apps = request.args.get('apps', "default")
     error_message = session.pop('error', "")
 
@@ -125,14 +125,14 @@ def login():
         # Calculate the base64 representation to transmit safely
         b64_json_value = base64.b64encode(json_value)
         return render_template("redirection.html",
-                               next=next,
+                               next=next_page,
                                apps=apps,
                                values=b64_json_value,
                                signature=signature)
     else:
         # User not logged, display the login page.
         return render_template("login.html",
-                               next=next,
+                               next=next_page,
                                apps=apps,
                                error=error_message)
 
@@ -141,7 +141,7 @@ def process_login():
     """
     Process the login request.
     """
-    next = request.form.get('next', "")
+    next_page = request.form.get('next', "")
     apps = request.form.get('apps', "default")
 
     username = request.form.get('username', '')
@@ -155,7 +155,7 @@ def process_login():
         except Exception as e:
             return redirect('/error')
 
-    return redirect('/login?next='+next+"&apps="+apps)
+    return redirect('/login?next='+next_page+"&apps="+apps)
 
 @csoMain.route("/error" ,methods=['POST','GET'])
 def error():
