@@ -67,6 +67,10 @@ def signed_tab(tab, key):
 
     return (json_value, signature)
 
+def require_topt():
+    user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
+    return user and user.secret
+
 def check_totp(code):
     """
     Validate / check OTP.
@@ -76,7 +80,6 @@ def check_totp(code):
     if "username" in session:
         # Find the user in database.
         user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
-
         if user and user.secret:
             # If User exist and has a secret
             totp = pyotp.TOTP(user.secret)
@@ -96,7 +99,7 @@ def main():
     """ Nothing on / """
     return ""
 
-@csoMain.route("/login")
+@csoMain.route("/login", methods=["GET", "POST"])
 def login():
     """
     This function ask the user for his login / password
@@ -105,6 +108,7 @@ def login():
 
     next_page = request.args.get('next', "")
     apps = request.args.get('apps', "default")
+    totp_value = request.form.get('totp', "").replace(" ", "")
     error_message = session.pop('error', "")
 
     # Si la personne est connecte alors ==> On redirige.
@@ -119,15 +123,20 @@ def login():
             # Application key unknown. Abort the request
             return redirect('/error')
 
-        # Calculate the signatur and prepare the data to create the POST values
+        # Calculate the signature and prepare the data to create the POST values
         json_value, signature = signed_tab(values, key)
 
+        # Test if user need to prodive a OTP Code
+        if require_topt():
+            if not check_totp(totp_value):
+                # While code isn't valid... loop until user provide a good code
+                return render_template("totp.html", next=next_page, apps=apps)
+
         # Calculate the base64 representation to transmit safely
-        b64_json_value = base64.b64encode(json_value)
         return render_template("redirection.html",
                                next=next_page,
                                apps=apps,
-                               values=b64_json_value,
+                               values=base64.b64encode(json_value),
                                signature=signature)
     else:
         # User not logged, display the login page.
