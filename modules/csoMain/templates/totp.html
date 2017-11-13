@@ -3,15 +3,10 @@
 {% block body %}
 <form action="/login?next={{next}}&apps={{apps}}" method="post">
 	<input name=_csrf_token type=hidden value="{{ csrf_token() }}">	
-	<div id='centerBox'>
-		<p>
-			<label>Validation en deux étapes :</label>
-			<br />
-			<input name='totp' type='text' class='full' value='' placeholder='Saisir le code' />
-		</p>
-		<p class='bottom'>
-        <input type='submit' class='btn large primary' value="Connexion" />
-		</p>
+	<div class="form-group">	
+		<label>Validation en deux étapes :</label>
+		<input name='totp' type='text' class="form-control" value='' placeholder='Saisir le code' />
 	</div>
+	<input type='submit' class="btn btn-success" value="Connexion" />
 </form>
 {% endblock %}

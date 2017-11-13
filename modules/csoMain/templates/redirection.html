@@ -5,22 +5,15 @@
 	<input name=_csrf_token type=hidden value="{{ csrf_token() }}">
 	<input type='hidden' value='{{signature}}' name='signature' />
 	<input type='hidden' value='{{values}}' name='values' />
-	<div id='centerBox'>
-		<p class='center'>
-			<img src='/static/images/loader.gif' />
-			<br /><br />
-			<label>Redirection vers "{{apps}}" en cours...</label>
-		</p>
-	</div>
+	<br />
+	<label>Redirection vers « {{apps}} » en cours...</label>
 </form>
 
 <script type="text/javascript"> 
-window.onload = init; 
-
-function init()
-{
-	document.getElementById('continuBox').submit();
-}
+	window.onload = init; 
+	function init(){
+		document.getElementById('continuBox').submit();
+	}
 </script>
 
 {% endblock %}
