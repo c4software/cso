@@ -7,9 +7,9 @@ CSO is a simple Centralized Sign-on. Manage your user login (user and group) wit
 - LDAP Auth.
 - Timebased OTP for user (Basic implementation)
 
-![Login example]("./static/images/home.png")
-![User example]("./static/images/users.png")
-![Secret example]("./static/images/secret.png")
+![Login example](./static/images/home.png)
+![User example](./static/images/users.png)
+![Secret example](./static/images/secret.png)
 
 ## WIP
 
