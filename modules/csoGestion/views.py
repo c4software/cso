@@ -17,7 +17,7 @@ def index():
     """
     Display the main page
     """
-    return render_template("index.html")
+    return redirect(get_listing_redirection("users"))
 
 @csoGestion.route("/login", methods=['GET','POST'])
 def login():
@@ -156,7 +156,7 @@ def save(tbl_name):
         db_session.commit()
     except:
         db_session.rollback()
-        
+
     return redirect(get_listing_redirection(tbl_name))
 
 @csoGestion.route("/<tbl_name>/remove/<key>/confirm")
