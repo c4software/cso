@@ -151,9 +151,12 @@ def save(tbl_name):
         else:
             val = post_value[curHeader]
         setattr(tbl_Object, curHeader, val)
-
-    db_session.merge(tbl_Object)
-    db_session.commit()
+    try:
+        db_session.merge(tbl_Object)
+        db_session.commit()
+    except:
+        db_session.rollback()
+        
     return redirect(get_listing_redirection(tbl_name))
 
 @csoGestion.route("/<tbl_name>/remove/<key>/confirm")
