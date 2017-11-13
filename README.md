@@ -31,7 +31,9 @@ pip install -r requirements.txt
 
 ## First setup
 
-Todo
+- Change the ```ldap_server``` and the ```ldap_server``` in the ```parameters.py```.
+- Run the ```setup.py```, and enter your « first » admin ```username``` for the CSO. (the username should match with someone on the LDAP server).
+- Start the test server ```python main.py```
 
 ## Workflow (login process)
 
