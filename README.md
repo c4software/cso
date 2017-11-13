@@ -1,6 +1,6 @@
 # CSO
 
-CSO is a simple Centralized Sign-on. Manage your user login (user and group) with your internal LDAP Edit
+CSO is a simple Centralized Sign-on (using to your internal LDAP)
 
 ✋ Legacy app i’ve built long time ago… Not perfect but running 24/7 since a looooong time…
 
