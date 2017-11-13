@@ -7,6 +7,10 @@ CSO is a simple Centralized Sign-on. Manage your user login (user and group) wit
 - LDAP Auth.
 - Timebased OTP for user (Basic implementation)
 
+![Login example]("./static/images/home.png")
+![User example]("./static/images/users.png")
+![Secret example]("./static/images/secret.png")
+
 ## WIP
 
 - [X] Fix bad CSRF Implementation.
@@ -24,6 +28,10 @@ CSO is a simple Centralized Sign-on. Manage your user login (user and group) wit
 ```shell
 pip install -r requirements.txt
 ```
+
+## First setup
+
+Todo
 
 ## Workflow (login process)
 
