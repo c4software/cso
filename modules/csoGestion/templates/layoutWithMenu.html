@@ -2,25 +2,45 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8" />
-	<title>CSO</title>
-	<link href="/static/styles/main.css" rel="stylesheet" type="text/css"/>
-	<link href="/static/styles/inputs.css" rel="stylesheet" type="text/css"/>
-	<link href="/static/styles/menu.css" rel="stylesheet" type="text/css"/>
-	<link href="/static/styles/btns.css" rel="stylesheet" type="text/css"/>	
-	<link href="/static/styles/tables.css" rel="stylesheet" type="text/css"/>	
+	<title>CSO - Admin</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.0.0-beta.4/dist/css/bootstrap-material-design.min.css" integrity="sha384-R80DC0KVBO4GSTw+wZ5x2zn2pu4POSErBkf8/fSFhPXHxvHJydT0CSgAP2Yo2r4I" crossorigin="anonymous">
+	<style>
+		html, body {
+			height: 100%;
+		}
+		body{
+			padding-top: 3.5rem;
+		}
+		a.nav-link {
+			color: rgba(0,0,0,.65);
+		}
+	</style>
+
 	<script src="/static/scripts/qrcode.min.js"></script>
 </head>
 <body>
-	<div id="sidebar">
-		<ul id="nav">
-			<li><a href="/admin/users/list">Utilisateurs</a></li>
-			<li><a href="/admin/secret/list">Multi-Facteurs</a></li>
-			<li><a href="/admin/apps/list">Applications</a></li>
-			<li><a href="/logout?next=/admin/logout">D&eacute;connexion</a></li>
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#">CSO - Admin</a>
+		<ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+			<li class="nav-item"><a class="nav-link" href="/logout?next=/admin/logout">D&eacute;connexion</a></li>
 		</ul>
-	</div>
-	<div id='content'>
-		{% block body %}{% endblock %}
+	</nav>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+				<ul class="nav nav-pills flex-column">
+					<li class="nav-item"><a class="nav-link" href="/admin/users/list">Utilisateurs</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/secret/list">Multi-Facteurs</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/apps/list">Applications</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+				{% block body %}{% endblock %}
+			</div>
+		</div>
 	</div>
 </body>
 </html>

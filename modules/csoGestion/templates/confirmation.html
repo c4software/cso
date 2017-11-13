@@ -1,11 +1,11 @@
 {% extends "layoutWithMenu.html" %}
 
 {% block body %}
-<div id='centerBox' style='text-align:center'>
-	Confirmer la suppression de <b>{{tblName}} -> {{key}}</b>.
-	<br />
-	<br />
-	<a href="/admin/{{tblName}}/remove/{{key}}" class="btn info">Confirmer</a>
-	<br /><br />
+<div class="card" style="width: 20rem;margin:auto">
+	<div class="card-body text-center">
+		Confirmer la suppression de <b>{{tblName}} -> {{key}}</b>.
+		<br><br>
+		<a href="/admin/{{tblName}}/remove/{{key}}" class="btn btn-danger">Confirmer</a>
+	</div>
 </div>
 {% endblock %}

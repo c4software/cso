@@ -2,31 +2,35 @@
 
 {% block body %}
 
-<h1>Liste des « {{action}} »</h1>
+<div class="row">
+	<div class="col">
+		<h2>Liste des « {{action}} »</h2>
+	</div>
+	<div class="col text-right">
+		<a href='/admin/{{action}}/add' class='btn btn-outline-primary'>Ajouter</a>
+	</div>
+</div>
 <br />
 
-<a href='/admin/{{action}}/add' class='btn info'>Ajouter</a>
-<br />
-
-<table>
+<table class="table">
 	<thead>
 		<tr>
-			<th>Actions</th>
 			{% for header in headers %}
 			<th>{{header}}</th>
 			{% endfor %}
+			<th class="text-right">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for items in list %}
 		<tr>
-			<td>
-				{% if not disable_modification %}<a href='/admin/{{action}}/get/{{items[key]}}' class='btn info'>Modification</a>{% endif %}
-				{% if not disable_remove %}<a href='/admin/{{action}}/remove/{{items[key]}}/confirm' class='btn danger'>Suppression</a>{% endif %}
-			</td>
 			{% for header in headers %}
 			<td>{{items[header]}}</td>
 			{% endfor %}
+			<td class="text-right">
+				{% if not disable_modification %}<a href='/admin/{{action}}/get/{{items[key]}}' class='btn btn-info btn-sm'>Modification</a>{% endif %}
+				{% if not disable_remove %}<a href='/admin/{{action}}/remove/{{items[key]}}/confirm' class='btn btn-danger btn-sm'>Suppression</a>{% endif %}
+			</td>
 		</tr>
 		{% endfor %}
 		{% if not list %}

@@ -1,13 +1,11 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div id='continuBox'>
-	<div id='centerBox'>
-		<p class='center'>
-			<label>Vous ne disposez pas des droits suffisants.</label>
-			<br /><br />
-			<a href="http://127.0.0.1:5000/logout?next=http://127.0.0.1:5000/admin/logout">D&eacute;connexion</a>
-		</p>
+<div class="card" style="width: 20rem;margin:auto">
+	<div class="card-body text-center">
+		<label>Vous ne disposez pas des droits suffisants.</label>
+		<br><br>
+		<a href="http://127.0.0.1:5000/logout?next=http://127.0.0.1:5000/admin/logout">D&eacute;connexion</a>
 	</div>
 </div>
 {% endblock %}
