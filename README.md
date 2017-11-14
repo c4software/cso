@@ -37,13 +37,17 @@ pip install -r requirements.txt
 
 ## Login Workflow
 
-The login workflow is based on a shared secret between the CSO and your « application client ». We can resume the workflow with :
+The login workflow is based on a shared secret between the CSO and your « application client ».
+
+We can resume the workflow with :
 
 - Client App : Redirect the user to the CSO (Via an HTML Form).
 - CSO : User authenticate (or is already authenticate).
 - CSO : Redirection to the « Client App » (Via an HTML Form).
 - Client App : Check if data signature is OK, and the time code (to prevent authentication replay).
 - Client App : Everything is OK, create the local session in your App.
+
+TODO PHP Implementation example
 
 ## Run (in dev)
 
