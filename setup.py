@@ -21,4 +21,4 @@ admin_application.key = "mWgBV6mKZ3nwhwpvMBxx"
 db_session.merge(admin_application)
 db_session.commit()
 
-print ("Setup Done.")
+print ("Setup Done. You can start the application and go to http://localhost:5000/admin/")
