@@ -35,14 +35,29 @@ pip install -r requirements.txt
 - Run the ```setup.py```, and enter your « first » admin ```username``` for the CSO. (the username should match with someone on the LDAP server).
 - Start the test server ```python main.py```
 
-## Workflow (login process)
+## Login Workflow
 
-Todo
 
 ## Run (in dev)
 
+To test quickly the CSO, just run the following command in your favorite terminal :
+
 ```shell
 python main.py
+```
+
+## Run in production
+
+Since I made this application a long time ago, it’s running from many years in production. I use in my setup UWSGI and NGINX to host the app.
+
+UWSGI Configuration :
+
+```
+```
+
+NGINX Configuration :
+
+```
 ```
 
 ## Administration
