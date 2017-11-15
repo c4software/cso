@@ -54,7 +54,7 @@ TODO PHP Implementation example
 To test quickly the CSO, just run the following command in your favorite terminal :
 
 ```shell
-python main.py
+python run.py
 ```
 
 ## Run in production
