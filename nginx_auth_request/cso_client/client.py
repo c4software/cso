@@ -5,7 +5,7 @@ if len(sys.argv) < 2:
     print("To use the cso_client you need to provide a CSO app key. \r\nExample : {0} mWgBV6mKZ3nwhwpvMBxx".format(sys.argv[0]))
     sys.exit()
 
-security_key = sys.argv[1]
+cso_app_key = sys.argv[1]
 
 @route('/checkAuth', method='POST')
 def checkAuth():
@@ -18,18 +18,18 @@ def checkAuth():
 
 @route("/auth")
 def auth():
-    if request.get_cookie("auth_username", secret=security_key):
+    if request.get_cookie("auth_username", secret=cso_app_key):
         return HTTPResponse(status=200)
     else:
         return HTTPResponse(status=401)
 
-def do_login(jsonValues, securityKey):
+def do_login(json_values, remote_hash):
     try:
-        values = json.loads(base64.b64decode(jsonValues))
-        values["key"] = security_key
-        mySecurityKey = hashlib.sha512(json.dumps(values, separators=(',',':'))).hexdigest()
+        values = json.loads(base64.b64decode(json_values))
+        values["key"] = cso_app_key
+        my_hash = hashlib.sha512(json.dumps(values, separators=(',',':'))).hexdigest()
         values['key'] = ""
-        if securityKey == mySecurityKey:
+        if remote_hash == my_hash:
             set_cookie(values)
             return True
         else:
@@ -40,14 +40,14 @@ def do_login(jsonValues, securityKey):
         return False
 
 def set_cookie(values):
-    response.set_cookie('auth_username', values["username"], httponly=True, secret=security_key)
-    response.set_cookie('auth_group', values["group"], httponly=True, secret=security_key)
-    response.set_cookie('auth_level', values["level"], httponly=True, secret=security_key)
+    response.set_cookie('auth_username', values["username"], httponly=True, secret=cso_app_key)
+    response.set_cookie('auth_group', values["group"], httponly=True, secret=cso_app_key)
+    response.set_cookie('auth_level', values["level"], httponly=True, secret=cso_app_key)
 
 def expire_cookie():
-    response.set_cookie('auth_username', "", expires=0, secret=security_key)
-    response.set_cookie('auth_group', "", expires=0, secret=security_key)
-    response.set_cookie('auth_level', "", expires=0, secret=security_key)
+    response.set_cookie('auth_username', "", expires=0, secret=cso_app_key)
+    response.set_cookie('auth_group', "", expires=0, secret=cso_app_key)
+    response.set_cookie('auth_level', "", expires=0, secret=cso_app_key)
 
 
 run(host='localhost', port=8000)
