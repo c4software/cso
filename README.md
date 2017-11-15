@@ -4,6 +4,21 @@ CSO is a simple Centralized Sign-on (using to your internal LDAP)
 
 ✋ Legacy app i’ve built long time ago… Not perfect but running 24/7 since a looooong time…
 
+
+<!-- TOC -->
+
+- [CSO](#cso)
+    - [Recent and planned changes](#recent-and-planned-changes)
+    - [Installation](#installation)
+    - [First setup](#first-setup)
+    - [Login Workflow](#login-workflow)
+    - [Run (in dev)](#run-in-dev)
+    - [Run in production](#run-in-production)
+    - [Nginx Setup](#nginx-setup)
+    - [Administration](#administration)
+
+<!-- /TOC -->
+
 - LDAP Auth.
 - Timebased OTP for user (Basic implementation)
 
