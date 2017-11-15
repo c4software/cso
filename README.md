@@ -11,13 +11,12 @@ CSO is a simple Centralized Sign-on (using to your internal LDAP)
 ![User example](./static/images/users.png)
 ![Secret example](./static/images/secret.png)
 
-## WIP
+## Recent and planned changes
 
 - [X] Fix bad CSRF Implementation.
 - [X] Update the Design to something more … modern!
-- [ ] Rewrite login (CSOMain module).
+- [X] Rewrite login (CSOMain module).
   - [X] Implement TOPT during the login.
-  - [ ] Add a max SESSION time
 - [X] Secret Administration (OTP):
   - [X] Generate.
   - [X] Update.
