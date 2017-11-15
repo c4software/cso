@@ -1,10 +1,14 @@
-import base64, json, hashlib
+import base64, json, hashlib, sys
 from bottle import route, run, template, request, response, HTTPResponse, redirect
 
-security_key = "mWgBV6mKZ3nwhwpvMBxx"
+if len(sys.argv) < 2:
+    print("To use the cso_client you need to provide a CSO app key. \r\nExample : {0} mWgBV6mKZ3nwhwpvMBxx".format(sys.argv[0]))
+    sys.exit()
+
+security_key = sys.argv[1]
 
 @route('/checkAuth', method='POST')
-def index():
+def checkAuth():
     signature = request.forms.get("signature")
     values = request.forms.get("values")
     if(do_login(values, signature)):
