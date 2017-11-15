@@ -3,7 +3,8 @@
 ## Quick setup
 
 - Setup the vhost like the sample configuration.
-- Configure the « secret_key » in the client.py and start the script (Python >=2.7).
+- Start the client ```client.py mWgBV6mKZ3nwhwpvMBxx``` (Python >=2.7).
+- Go to your website you should be redirect to the CSO.
 
 ## Add (or update) your NGINX Vhost
 
