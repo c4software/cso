@@ -128,7 +128,7 @@ def login():
         key = get_app_key(apps)
         if key is None:
             # Application key unknown. Abort the request
-            return redirect('/error')
+            return redirect('/error', next=next_page)
 
         # Calculate the signature and prepare the data to create the POST values
         json_value, signature = signed_tab(values, key)
@@ -173,7 +173,7 @@ def process_login():
         try:
             ldap_login(username, password, apps)
         except Exception as e:
-            return redirect('/error')
+            return redirect('/error', next=next_page)
 
     return redirect('/login?next='+next_page+"&apps="+apps)
 
