@@ -38,7 +38,7 @@ def ldap_login(username, password, apps):
     if user is None:
         return_value = {"username": username, "group": "users", "level": 0, "key": '', "timeToken": ""}
     else:
-        return_value = {"username": username, "group": user.group, "level": user.level, "key": '', "timeToken": ""}
+        return_value = {"username": username, "group": user.group + ",users", "level": user.level, "key": '', "timeToken": ""}
 
     # Calcul du hash de la clef
     json_value, signature = signed_tab(return_value, key)
