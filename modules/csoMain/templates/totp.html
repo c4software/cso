@@ -1,12 +1,19 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form action="/login?next={{next}}&apps={{apps}}" method="post">
+<form action="/login?next={{next}}&apps={{apps}}" method="post" class="text-left">
 	<input name=_csrf_token type=hidden value="{{ csrf_token() }}">	
 	<div class="form-group">	
 		<label>Validation en deux étapes :</label>
 		<input name='totp' type='text' class="form-control" value='' placeholder='Saisir le code' />
 	</div>
-	<input type='submit' class="btn btn-success" value="Connexion" />
+	<div class="form-check">
+		<label class="form-check-label">
+		  <input type="checkbox" class="form-check-input" name="save_computer" value="1"> Mémoriser sur cet ordinateur.
+		</label>
+		</div>
+	<div class="text-center">
+		<input type='submit' class="btn btn-success" value="Connexion" />
+	</div>
 </form>
 {% endblock %}

@@ -68,8 +68,14 @@ def signed_tab(tab, key):
     return (json_value, signature)
 
 def require_topt():
-    user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
-    return user and user.secret
+    """
+    Current have enable TOTP ? 
+    """
+    if "saved_computer" in session and session["saved_computer"] == "1":
+        return False
+    else:
+        user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
+        return user and user.secret
 
 def check_totp(code):
     """
@@ -109,6 +115,7 @@ def login():
     next_page = request.args.get('next', "")
     apps = request.args.get('apps', "default")
     totp_value = request.form.get('totp', "").replace(" ", "")
+    save_computer = request.form.get("save_computer", "0");
     error_message = session.pop('error', "")
 
     # Si la personne est connecte alors ==> On redirige.
@@ -131,6 +138,10 @@ def login():
             if not check_totp(totp_value):
                 # While code isn't valid... loop until user provide a good code
                 return render_template("totp.html", next=next_page, apps=apps)
+            else:
+                # If the code is valide, check if user choose to save the current computer.
+                if save_computer == "1":
+                    session["saved_computer"] = "1"
 
         # Calculate the base64 representation to transmit safely
         return render_template("redirection.html",
@@ -216,4 +227,5 @@ def logout_all():
     session.pop('username', None)
     session.pop('values', None)
     session.pop('signature', None)
+    session.pop('saved_computer', None)
     return redirect(next_page)
