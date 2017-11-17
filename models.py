@@ -12,11 +12,10 @@ class UserDroit(Base):
     header = ['username', 'group', 'level']
     primary_key = 'username'
 
-    def __init__(self, username=None, group="", level=0, secret=""):
+    def __init__(self, username=None, group="", level=0):
         self.username = username
         self.group = group
         self.level = level
-        self.secret = secret
 
     def __repr__(self):
         return '<UserDroit %r>' % (self.username)

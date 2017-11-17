@@ -144,13 +144,15 @@ def save(tbl_name):
     post_value = request.form
     tbl_Object = get_tbl_object(tbl_name)()
 
-    # Remplissage de l'objet
+    # Fill the object with post data
     for curHeader in tbl_Object.header:
         if post_value[curHeader] == "":
             val = None
         else:
             val = post_value[curHeader]
         setattr(tbl_Object, curHeader, val)
+
+    # Save the object
     try:
         db_session.merge(tbl_Object)
         db_session.commit()
