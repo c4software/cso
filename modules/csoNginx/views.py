@@ -4,6 +4,10 @@ from models import Application
 
 csoNginx = Blueprint('csoNginx', __name__)
 
+#
+# TODO Handle the private key recuperation in session.
+# cso_app_key
+
 @csoNginx.route('/checkAuth', methods=['POST'])
 def checkAuth():
     signature = request.forms.get("signature")
