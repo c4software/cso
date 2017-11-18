@@ -11,7 +11,7 @@ cso_app_key = sys.argv[1]
 def checkAuth():
     signature = request.forms.get("signature")
     values = request.forms.get("values")
-    if(do_login(values, signature)):
+    if do_login(values, signature):
         return redirect('/')
     else:
         return HTTPResponse(status=401)
