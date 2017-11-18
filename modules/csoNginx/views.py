@@ -1,4 +1,4 @@
-import base64, json, hashlib, sys
+import base64, json, hashlib
 from flask import Blueprint, redirect, request, session, abort
 from models import Application
 
@@ -9,9 +9,9 @@ def checkAuth():
     signature = request.forms.get("signature")
     values = request.forms.get("values")
     if check_and_set_login(values, signature):
-        return redirect('/')
+        return set_data(values)
     else:
-        return abort(401)
+        return expire_data()
 
 @csoNginx.route("/auth")
 def auth():
@@ -27,21 +27,20 @@ def check_and_set_login(json_values, remote_hash):
         my_hash = hashlib.sha512(json.dumps(values, separators=(',', ':'))).hexdigest()
         values['key'] = ""
         if remote_hash == my_hash:
-            set_data(values)
             return True
         else:
-            expire_data()
             return False
     except Exception as e:
-        expire_data()
         return False
 
 def set_data(values):
     session['auth_username'] = values["username"]
     session['auth_group'] = values["group"]
     session['auth_level'] = values["level"]
+    return redirect("/")
 
 def expire_data():
-    session['auth_username'] = ""
-    session['auth_group'] = ""
-    session['auth_level'] = ""
+    session.pop('auth_username')
+    session.pop('auth_group')
+    session.pop('auth_level')
+    return abort(401)
