@@ -14,7 +14,7 @@ app.secret_key = "9jHy6lAOxBKzhbY3eeGRB1i5pbnqgA58XDm07xXTPxfZUzcPq9r7+SKYJseosj
 #register des modules
 app.register_blueprint(csoMain)
 app.register_blueprint(csoGestion, url_prefix='/admin')
-app.register_blueprint(csoNginx, url_prefix='/nginx')
+#app.register_blueprint(csoNginx, url_prefix='/nginx')
 
 @app.before_request
 def csrf_protect():
