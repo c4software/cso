@@ -6,6 +6,7 @@ import uuid
 from flask import Flask, render_template, request, session, abort
 from modules.csoMain.views import csoMain
 from modules.csoGestion.views import csoGestion
+from modules.csoNginx.views import csoNginx
 
 app = Flask(__name__)
 app.secret_key = "9jHy6lAOxBKzhbY3eeGRB1i5pbnqgA58XDm07xXTPxfZUzcPq9r7+SKYJseosjMF6lk=" #uuid.uuid4().hex
@@ -13,6 +14,7 @@ app.secret_key = "9jHy6lAOxBKzhbY3eeGRB1i5pbnqgA58XDm07xXTPxfZUzcPq9r7+SKYJseosj
 #register des modules
 app.register_blueprint(csoMain)
 app.register_blueprint(csoGestion, url_prefix='/admin')
+app.register_blueprint(csoNginx, url_prefix='/nginx')
 
 @app.before_request
 def csrf_protect():
