@@ -9,7 +9,7 @@ CSO is a simple Centralized Sign-on (using to your internal LDAP)
 - [CSO](#cso)
     - [Recent and planned changes](#recent-and-planned-changes)
     - [Installation](#installation)
-    - [First setup](#first-setup)
+    - [Setup the CSO for your configuration](#setup-the-cso-for-your-configuration)
     - [Login Workflow](#login-workflow)
     - [Run (in dev)](#run-in-dev)
     - [Run in production](#run-in-production)
@@ -46,11 +46,11 @@ CSO is a simple Centralized Sign-on (using to your internal LDAP)
 pip install -r requirements.txt
 ```
 
-## First setup
+## Setup the CSO for your configuration
 
-- Change the ```ldap_server``` and the ```ldap_server``` in the ```parameters.py```.
+- Change the ```ldap_server``` and the ```ldap_dn``` in the ```parameters.py```.
 - Run the ```setup.py```, and enter your « first » admin ```username``` for the CSO. (the username should match with someone on the LDAP server).
-- Start the test server ```python main.py```
+- Start the test server ```python run.py```
 
 ## Login Workflow
 
