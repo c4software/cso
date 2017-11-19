@@ -88,7 +88,12 @@ NGINX Configuration :
 
 ## Nginx Setup
 
-Since its not always possible to change the auth mechanism in current application, I made a sample configuration to add the CSO on the top layer in most app « the Nginx Proxy server ».
+Since its not always possible to change the auth mechanism in currents applications, I made a sample configuration to add the CSO on the top layer in most app « the Nginx Proxy server ».
+
+You have two choices :
+
+- The standalone, you have a small script on each server.
+- Centralized version, each server must be able to contact the CSO in HTTP to test if the connection is active.
 
 [Follow the Guide](./nginx_auth_request/)
 

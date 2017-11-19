@@ -1,6 +1,6 @@
 # Use NGINX+CSO to authenticate your user
 
-You have to way to USE CSO + NGINX
+You have two way to USE CSO + NGINX
 
 - The standalone, you have a small script on each server.
 - Centralized version, each server must be able to contact the CSO in HTTP to test if the connection is active.
