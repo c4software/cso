@@ -59,18 +59,20 @@ def removeSecretConfirm(key):
     Ask confirmation for removing a user secret
     """
     return render_template('confirmation.html',
-                           tblName="users",
+                           tblName="secret",
                            key=key,
                            custom_message="Confirmer la suppression du secret de {0} ?".format(key))
 
 @csoGestion.route("/secret/remove/<key>")
 @login_required
 def removeSecret(key):
-    user_secret = UserDroit.query.filter(UserDroit.username != key).first()
-    user_secret.secret = None
-    db_session.merge(user_secret)
-    db_session.commit()
-    return redirect("/secret/list")
+    user = UserDroit.query.filter(UserDroit.username == key).first()
+    if user:
+        user.secret = None
+        db_session.merge(user)
+        db_session.commit()
+        
+    return redirect("/admin/secret/list")
 
 @csoGestion.route("/secret/add")
 @csoGestion.route("/secret/get/<username>")
