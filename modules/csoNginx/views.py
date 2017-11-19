@@ -1,25 +1,28 @@
 """
 This module is used to manage the connection using the CSO with NGINX.
 """
-
-import base64, json, hashlib
+import base64
+import json
+import hashlib
 from flask import Blueprint, redirect, request, session, abort
 from models import Application
 
 csoNginx = Blueprint('csoNginx', __name__)
 
-#
-# TODO Handle the private key recuperation in session.
-# cso_app_key
-
 @csoNginx.route('/checkAuth', methods=['POST'])
-def checkAuth():
+def check_auth():
     """
     Process the login data provided in post by the CSO.
+    Input POST (automatically provided by the CSO):
+        - signature
+        - values
+    GET:
+        - apps (the app name of your application, used to recover the secrect key)
     """
+    apps = request.args.get('apps', "default")
     signature = request.forms.get("signature")
     values = request.forms.get("values")
-    if check_and_set_login(values, signature):
+    if check_and_set_login(values, signature, apps):
         return set_data(values)
     else:
         return expire_data()
@@ -27,20 +30,26 @@ def checkAuth():
 @csoNginx.route("/auth")
 def auth():
     """
-    Test if user is currently connected
+    This path will be used internaly by the nginx at each requests to test if user is "authenticated". (use the nginx auth_request)
+    Return 200 if user is connected (according the session), or 401 if user need to authenticate.
     """
     if session.get("auth_username", None):
         return ""
     else:
         return abort(401)
 
-def check_and_set_login(json_values, remote_hash):
+def check_and_set_login(json_values, remote_hash, apps):
     """
-    Test if data is matching the calculated hash.
+    Validate the json_values and the remote hash according the apps name provided.
     """
     try:
+        # Get the secret app key in the database.
+        requested_application = Application.query.filter(Application.nom == apps).first()
+        if not requested_application:
+            return False
+
         values = json.loads(base64.b64decode(json_values))
-        values["key"] = "" #cso_app_key
+        values["key"] = requested_application.key
         my_hash = hashlib.sha512(json.dumps(values, separators=(',', ':'))).hexdigest()
         values['key'] = ""
         if remote_hash == my_hash:
