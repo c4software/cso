@@ -23,9 +23,9 @@ If you use SystemD you can use the [cso_client.service file](./cso_client/cso_cl
 
 ### Add (or update) your NGINX Vhost
 
-Take a look at [the sample configuration](./nginx_sample_vhost.conf)
+Take a look at [the sample configuration](./nginx_sample_vhost_standalone.conf)
 
-If you already have a vhost juste add to your ```server``` block the following configuration:
+If you already have a vhost juste add the following configuration to your current ```server``` block :
 
 ✋ Don’t forget to edit the « https://login… », its should be your CSO URL.
 
