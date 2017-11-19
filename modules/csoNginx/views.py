@@ -22,6 +22,8 @@ def check_auth():
     apps = request.args.get('apps', "default")
     signature = request.forms.get("signature")
     values = request.forms.get("values")
+
+    # Auth data is correct ?
     if check_and_set_login(values, signature, apps):
         return set_data(values)
     else:
@@ -48,10 +50,20 @@ def check_and_set_login(json_values, remote_hash, apps):
         if not requested_application:
             return False
 
+        # Decode the base64 and transform the json to python format
         values = json.loads(base64.b64decode(json_values))
+        
+        # Insert the "secret" key
         values["key"] = requested_application.key
+
+        # Calculate the secret hash
         my_hash = hashlib.sha512(json.dumps(values, separators=(',', ':'))).hexdigest()
+
+        # The secret key is no longer needed, remove it from values
         values['key'] = ""
+
+        # Hash should match, if its not the case ? 
+        # the data has been manipulated by someone during the authentication process
         if remote_hash == my_hash:
             return True
         else:
