@@ -47,11 +47,30 @@ def list_secret():
     """
     user_secret = UserDroit.query.filter(UserDroit.secret != "").all()
     return render_template('list.html',
-                           disable_remove=True,
                            list=user_secret,
                            headers=["username"],
                            action="secret",
                            key="username")
+
+@csoGestion.route("/secret/remove/<key>/confirm")
+@login_required
+def removeSecretConfirm(key):
+    """
+    Ask confirmation for removing a user secret
+    """
+    return render_template('confirmation.html',
+                           tblName="users",
+                           key=key,
+                           custom_message="Confirmer la suppression du secret de {0} ?".format(key))
+
+@csoGestion.route("/secret/remove/<key>")
+@login_required
+def removeSecret(key):
+    user_secret = UserDroit.query.filter(UserDroit.username != key).first()
+    user_secret.secret = None
+    db_session.merge(user_secret)
+    db_session.commit()
+    return redirect("/secret/list")
 
 @csoGestion.route("/secret/add")
 @csoGestion.route("/secret/get/<username>")
