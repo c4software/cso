@@ -5,7 +5,7 @@ init_db()
 # Create the first UserDroit
 username = raw_input("Your first admin username (should match with an existing LDAP account) : ")
 main_user = UserDroit(username=username)
-main_user.group = "admin,users"
+main_user.group = "admin"
 main_user.level = "10"
 
 db_session.merge(main_user)
