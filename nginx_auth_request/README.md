@@ -1,12 +1,27 @@
 # Use NGINX+CSO to authenticate your user
 
-## Quick setup
+You have to way to USE CSO + NGINX
+
+- The standalone, you have a small script on each server.
+- Centralized version, each server must be able to contact the CSO in HTTP to test if the connection is active.
+
+## Standalone setup
+
+### Quick overview
 
 - Setup the vhost like the sample configuration.
 - Start the client ```client.py mWgBV6mKZ3nwhwpvMBxx``` (Python >=2.7).
 - Go to your website you should be redirect to the CSO.
 
-## Add (or update) your NGINX Vhost
+### Install the CSO_CLIENT service
+
+If you use SystemD you can use the [cso_client.service file](./cso_client/cso_client.service) to start the cso_client automatically on system startup.
+
+- copy the ```cso_client.service``` in the ```/etc/systemd/system/```
+- Run ```sudo systemctl daemon-reload```
+- ```sudo systemctl start cso_client```
+
+### Add (or update) your NGINX Vhost
 
 Take a look at [the sample configuration](./nginx_sample_vhost.conf)
 
@@ -37,17 +52,8 @@ location /checkAuth {
 }
 ```
 
-Now to enable the « auth » redirectio. Add to any ```location``` block you want to « protect » by the CSO
+Now to enable the « auth » redirectio. Add this configuration in any ```location``` block you want to « protect » by the CSO
 
 ```conf
     auth_request /auth;
 ```
-
-
-## Install the CSO_CLIENT service
-
-If you use SystemD you can use the [cso_client.service file](./cso_client/cso_client.service) to start the cso_client automatically on system startup.
-
-- copy the ```cso_client.service``` in the ```/etc/systemd/system/```
-- Run ```sudo systemctl daemon-reload```
-- ```sudo systemctl start cso_client```
