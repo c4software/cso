@@ -24,8 +24,9 @@ def check_auth():
     values = request.form.get("values", "")
 
     # Auth data is correct ?
-    if check_and_set_login(values, signature, apps):
-        return set_data(values)
+    decoded_values = check_and_set_login(values, signature, apps)
+    if decoded_values:
+        return set_data(decoded_values)
     else:
         return expire_data()
 
@@ -65,9 +66,9 @@ def check_and_set_login(json_values, remote_hash, apps):
         # Hash should match, if its not the case ? 
         # the data has been manipulated by someone during the authentication process
         if remote_hash == my_hash:
-            return True
+            return values
         else:
-            return False
+            return None
     except Exception as e:
         return False
 
