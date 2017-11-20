@@ -20,13 +20,14 @@ def check_auth():
         - apps (the app name of your application, used to recover the secrect key)
     """
     apps = request.args.get('apps', "default")
+    next_hop = request.args.get('next', "/")
     signature = request.form.get("signature", "")
     values = request.form.get("values", "")
 
     # Auth data is correct ?
     decoded_values = check_and_set_login(values, signature, apps)
     if decoded_values:
-        return set_data(decoded_values)
+        return set_data(decoded_values, next_hop)
     else:
         return expire_data()
 
@@ -72,14 +73,14 @@ def check_and_set_login(json_values, remote_hash, apps):
     except Exception as e:
         return False
 
-def set_data(values):
+def set_data(values, next_hop):
     """
     Save the currently connected user for the domain.
     """
     session['auth_username'] = values["username"]
     session['auth_group'] = values["group"]
     session['auth_level'] = values["level"]
-    return redirect("/")
+    return redirect(next_hop)
 
 def expire_data():
     """
