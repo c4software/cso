@@ -21,7 +21,7 @@ def csrf_protect():
     """
     Test if CSRF if request is POST and if CSRF is matching
     """
-    if request.method == "POST":
+    if request.method == "POST" and "/nginx/" not in request.path:
         token = session.pop('_csrf_token', None)
         if not token or token != request.form.get('_csrf_token'):
             abort(403)
