@@ -4,6 +4,7 @@ This module is used to manage the connection using the CSO with NGINX.
 import base64
 import json
 import hashlib
+import datetime
 from flask import Blueprint, redirect, request, session, abort
 from models import Application
 
@@ -42,6 +43,13 @@ def auth():
     else:
         return abort(401)
 
+def is_old_request(time_token):
+    """
+    Test if provided values for login are older than 10 minutes.
+    """
+    time_token = datetime.datetime.fromtimestamp(int(time_token))
+    return time_token < datetime.datetime.now()-datetime.timedelta(minutes=10)
+
 def check_and_set_login(json_values, remote_hash, apps):
     """
     Validate the json_values and the remote hash according the apps name provided.
@@ -54,7 +62,7 @@ def check_and_set_login(json_values, remote_hash, apps):
 
         # Decode the base64 and transform the json to python format
         values = json.loads(base64.b64decode(json_values))
-        
+
         # Insert the "secret" key
         values["key"] = requested_application.key
 
@@ -64,9 +72,9 @@ def check_and_set_login(json_values, remote_hash, apps):
         # The secret key is no longer needed, remove it from values
         values['key'] = ""
 
-        # Hash should match, if its not the case ? 
+        # Hash should match, if its not the case ?
         # the data has been manipulated by someone during the authentication process
-        if remote_hash == my_hash:
+        if not is_old_request(values["timeToken"]) and remote_hash == my_hash:
             return values
         else:
             return None
