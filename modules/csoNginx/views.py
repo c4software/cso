@@ -20,8 +20,8 @@ def check_auth():
         - apps (the app name of your application, used to recover the secrect key)
     """
     apps = request.args.get('apps', "default")
-    signature = request.forms.get("signature")
-    values = request.forms.get("values")
+    signature = request.form.get("signature", "")
+    values = request.form.get("values", "")
 
     # Auth data is correct ?
     if check_and_set_login(values, signature, apps):
