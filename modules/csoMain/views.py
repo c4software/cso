@@ -67,7 +67,7 @@ def signed_tab(tab, key):
 
     return (json_value, signature)
 
-def require_topt():
+def require_totp():
     """
     Current have enable TOTP ? 
     """
@@ -134,9 +134,12 @@ def login():
         json_value, signature = signed_tab(values, key)
 
         # Test if user need to prodive a OTP Code
-        if require_topt():
-            if not check_totp(totp_value):
-                # While code isn't valid... loop until user provide a good code
+        if require_totp():
+            if totp_value and not check_totp(totp_value):
+                # Code isn't valid. Abort the connexion
+                return redirect('/error?next=' + next_page)
+            elif not totp_value:
+                # OTP required and no OTP, ask for it
                 return render_template("totp.html", next=next_page, apps=apps)
             else:
                 # If the code is valide, check if user choose to save the current computer.
