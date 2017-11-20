@@ -51,6 +51,15 @@ def ldap_login(username, password, apps):
 
     return (b64_json_value, signature)
 
+def clear_session():
+    """
+    Clear all user data in session
+    """
+    session.pop('username', None)
+    session.pop('values', None)
+    session.pop('signature', None)
+    session.pop('saved_computer', None)
+
 def signed_tab(tab, key):
     """Calcul de la signature de l'array"""
     tab['timeToken'] = int(time.time())
@@ -187,6 +196,7 @@ def error():
     """
     message = request.args.get('message', "Vous ne disposez pas des droits suffisants.")
     next_page = request.args.get('next', default_website)
+    clear_session()
     return render_template("error.html", message=message, next=next_page)
 
 @csoMain.route("/islogin", methods=['GET'])
@@ -227,8 +237,5 @@ def logout_all():
     Remove local session. And redirect to the initial request
     """
     next_page = request.form.get('next', "")
-    session.pop('username', None)
-    session.pop('values', None)
-    session.pop('signature', None)
-    session.pop('saved_computer', None)
+    clear_session()
     return redirect(next_page)
