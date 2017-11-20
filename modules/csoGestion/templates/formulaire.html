@@ -22,7 +22,7 @@
 							{{object[header]}}
 						{% elif 'qrcode_' in header %}
 							<input type='hidden' value='{{object[header]}}' name='{{header}}' />
-							<div id="qrcode"></div>
+							<a href="otpauth://totp/CSO?secret={{object[header]}}&issuer=CSO" target="blank" id="qrcode"></a>
 							<script>
 								new QRCode(document.getElementById("qrcode"), "otpauth://totp/CSO?secret={{object[header]}}&issuer=CSO");
 							</script>
