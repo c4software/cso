@@ -37,8 +37,8 @@ CSO is a simple Centralized Sign-on (using to your internal LDAP)
   - [X] Share via QRCode.
 - [ ] Implement timedelta checking in
   - [ ] Standalone Nginx client.
-  - [ ] Admin login process.
-  - [ ] Nginx module.
+  - [X] Admin login process.
+  - [X] Nginx module.
 
 ## Installation
 
