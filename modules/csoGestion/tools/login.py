@@ -6,6 +6,7 @@ from functools import wraps
 import base64
 import json
 import hashlib
+import datetime
 from flask import session, redirect
 
 login_url = "/login?apps=admin&next=/admin/login"
@@ -20,6 +21,13 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+def is_old_request(time_token):
+    """
+    Test if provided values for login are older than 10 minutes.
+    """
+    time_token = datetime.datetime.fromtimestamp(int(time_token))
+    return time_token < datetime.datetime.now()-datetime.timedelta(minutes=10)
+
 def do_login(jsonValues, securityKey):
     try:
         values = json.loads(base64.b64decode(jsonValues))
@@ -27,8 +35,8 @@ def do_login(jsonValues, securityKey):
 
         my_security_key = hashlib.sha512(json.dumps(values, separators=(',', ':'))).hexdigest()
         values['key'] = ""
-
-        if securityKey == my_security_key:
+        
+        if not is_old_request(values["timeToken"]) and securityKey == my_security_key:
             session['user'] = values
             if 'admin' in values['group'].split(','):
                 return True
