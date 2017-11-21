@@ -86,7 +86,7 @@ def add_secret(username=""):
                            object={"username": username, "qrcode_secret": pyotp.random_base32()},
                            headers=["username", "qrcode_secret"],
                            action="secret", key="",
-                           actionType="Modifier")
+                           actionType="Sauvegarder")
 
 @csoGestion.route("/secret/save", methods=['POST','GET'])
 @login_required
