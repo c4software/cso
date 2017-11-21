@@ -132,6 +132,7 @@ def add(tbl_name):
         return render_template('formulaire.html',
                                headers=tbl_object.header,
                                action=tbl_name,
+                               object={},
                                key=tbl_object.primary_key,
                                actionType="Ajouter")
     except Exception as e:

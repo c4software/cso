@@ -14,25 +14,21 @@
 			<input name=_csrf_token type=hidden value="{{ csrf_token() }}">	
 			{% for header in headers %}
 			<div class="form-group">
-			<label>{{header}} :</label>
-				{% if actionType == "Modifier" %}
-					<div>
-						{% if key == header %}
-							<input type='hidden' value='{{object[header]}}' name='{{header}}' />
-							{{object[header]}}
-						{% elif 'qrcode_' in header %}
-							<input type='hidden' value='{{object[header]}}' name='{{header}}' />
-							<a href="otpauth://totp/CSO?secret={{object[header]}}&issuer=CSO" target="blank" id="qrcode"></a>
-							<script>
-								new QRCode(document.getElementById("qrcode"), "otpauth://totp/CSO?secret={{object[header]}}&issuer=CSO");
-							</script>
-						{% else %}
-							<input type='text' class="form-control" placeholder="{{header}}" value='{{object[header]}}' name='{{header}}' />
-						{% endif %}
-					</div>
-				{% else %}
-					<div><input type='text' class="form-control" value='' placeholder="{{header}}" name='{{header}}' /></div>
-				{% endif %}
+				<label>{{header}} :</label>
+				<div>
+					{% if actionType == "Modifier" and key == header %}
+						<input type='hidden' value='{{object[header]}}' name='{{header}}' />
+						{{object[header]}}
+					{% elif 'qrcode_' in header %}
+						<input type='hidden' value='{{object[header]}}' name='{{header}}' />
+						<a href="otpauth://totp/CSO?secret={{object[header]}}&issuer=CSO" target="blank" id="qrcode"></a>
+						<script>
+							new QRCode(document.getElementById("qrcode"), "otpauth://totp/CSO?secret={{object[header]}}&issuer=CSO");
+						</script>
+					{% else %}
+						<input type='text' class="form-control" value='{{object[header]}}' placeholder="{{header}}" name='{{header}}' />
+					{% endif %}
+				</div>
 			</div>
 			{% endfor %}
 
