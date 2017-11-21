@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, Boolean
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -25,13 +25,15 @@ class Application(Base):
     id = Column(Integer, primary_key=True)
     nom = Column(String(100))
     key = Column(Text)
+    otp_required = Column(Boolean)
 
-    header = ['id', 'nom', 'key']
+    header = ['id', 'nom', 'key', 'otp_required']
     primary_key = 'id'
 
     def __init__(self, nom=None, key=None):
         self.nom = nom
         self.key = key
+        self.otp_required = False
 
     def __repr__(self):
         return '<Application %r>' % (self.nom)
