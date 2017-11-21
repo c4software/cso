@@ -39,6 +39,7 @@ CSO is a simple Centralized Sign-on (using to your internal LDAP)
   - [X] Standalone Nginx client.
   - [X] Admin login process.
   - [X] Nginx module.
+- [ ] Force apps to only accept user with OTP.
 
 ## Installation
 
