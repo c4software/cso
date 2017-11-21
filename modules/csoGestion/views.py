@@ -27,8 +27,8 @@ def login():
     if do_login(request.form.get('values', request.args.get('values', '')), request.form.get('signature', request.args.get('signature', ''))):
         return redirect(url_for('csoGestion.index'))
     else:
-        # Non autorise.
-        return render_template('notAuthorized.html')
+        do_logout()
+        return render_template('disconnect.html')
 
 @csoGestion.route("/logout")
 @login_required
