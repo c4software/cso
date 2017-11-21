@@ -19,7 +19,7 @@ def index():
     """
     return redirect(get_listing_redirection("users"))
 
-@csoGestion.route("/login", methods=['GET','POST'])
+@csoGestion.route("/login", methods=['GET', 'POST'])
 def login():
     """
     Do the login process
@@ -54,7 +54,7 @@ def list_secret():
 
 @csoGestion.route("/secret/remove/<key>/confirm")
 @login_required
-def removeSecretConfirm(key):
+def remove_secret_confirm(key):
     """
     Ask confirmation for removing a user secret
     """
@@ -88,7 +88,7 @@ def add_secret(username=""):
                            action="secret", key="",
                            actionType="Sauvegarder")
 
-@csoGestion.route("/secret/save", methods=['POST','GET'])
+@csoGestion.route("/secret/save", methods=['POST', 'GET'])
 @login_required
 def save_secret():
     """
@@ -159,7 +159,7 @@ def get(tbl_name, get_element):
         return redirect(url_for('csoGestion.index'))
 
 
-@csoGestion.route("/<tbl_name>/save", methods=['POST','GET'])
+@csoGestion.route("/<tbl_name>/save", methods=['POST', 'GET'])
 @login_required
 def save(tbl_name):
     """
@@ -187,7 +187,7 @@ def save(tbl_name):
 
 @csoGestion.route("/<tbl_name>/remove/<key>/confirm")
 @login_required
-def removeConfirm(key,tbl_name):
+def remove_confirm(key, tbl_name):
     """
     Ask if user confirm the deletion
     """
@@ -195,7 +195,7 @@ def removeConfirm(key,tbl_name):
 
 @csoGestion.route("/<tbl_name>/remove/<key>")
 @login_required
-def remove(key,tbl_name):
+def remove(key, tbl_name):
     """
     Delete the <key> element in the <tbl_name>
     """

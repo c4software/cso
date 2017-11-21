@@ -182,7 +182,7 @@ def login():
                                apps=apps,
                                error=error_message)
 
-@csoMain.route("/doLogin", methods=['POST','GET'])
+@csoMain.route("/doLogin", methods=['POST', 'GET'])
 def process_login():
     """
     Process the login request.
