@@ -131,6 +131,7 @@ def add(tbl_name):
         tbl_object = get_tbl_object(tbl_name)
         return render_template('formulaire.html',
                                headers=tbl_object.header,
+                               is_boolean=tbl_object.is_boolean,
                                action=tbl_name,
                                object={},
                                key=tbl_object.primary_key,
@@ -149,6 +150,7 @@ def get(tbl_name, get_element):
         current = tbl_object.query.filter(tbl_object.primary_key+" == '"+get_element+"'").first()
         return render_template('formulaire.html',
                                headers=tbl_object.header,
+                               is_boolean=tbl_object.is_boolean,
                                action=tbl_name,
                                key=tbl_object.primary_key,
                                actionType="Modifier",

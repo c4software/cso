@@ -25,6 +25,12 @@
 						<script>
 							new QRCode(document.getElementById("qrcode"), "otpauth://totp/CSO?secret={{object[header]}}&issuer=CSO");
 						</script>
+					{% elif header in is_boolean %}
+						<select data-selected="{{object[header]}}" id="{{header}}" class="form-control" name='{{header}}'>
+							<option></option>
+							<option value="1">True</option>
+							<option value="0">False</option>
+						</select>
 					{% else %}
 						<input type='text' class="form-control" value='{{object[header]}}' placeholder="{{header}}" name='{{header}}' />
 					{% endif %}
@@ -38,5 +44,18 @@
 		</form>
 	</div>
 </div>
+
+<script>
+	$("select").each(function(){
+		var db_value = $(this).attr("data-selected");
+		if(db_value == "True"){
+			$(this).val("1");
+		}else if(db_value == "False"){
+			$(this).val("0");
+		}else{
+			$(this).val(db_value);
+		}
+	});
+</script>
 
 {% endblock %}
