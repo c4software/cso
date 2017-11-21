@@ -14,13 +14,13 @@ from parameters import default_website, ldap_server, ldap_dn
 
 csoMain = Blueprint('csoMain', __name__, template_folder='templates')
 
-def get_app_key(app_name):
+def get_app(app_name):
     """
-    Recuperation de la clef en bdd
+    Return the requested in param
     """
     app = Application.query.filter(Application.nom == app_name).first()
     if app is not None:
-        return app.key
+        return app
     else:
         return None
 
@@ -28,7 +28,12 @@ def ldap_login(username, password, apps):
     """
         Gestion du login LDAP
     """
-    key = get_app_key(apps)
+    current_app = get_app(apps)
+    if current_app:
+        key = current_app.key
+    else:
+        key = None
+
     ldap_connector = ldap.initialize(ldap_server)
     ldap_connector.simple_bind_s(ldap_dn.format(username), password)
     ldap_connector.unbind_s()
@@ -76,17 +81,23 @@ def signed_tab(tab, key):
 
     return (json_value, signature)
 
-def require_totp():
+def require_totp(current_app):
     """
-    Current have enable TOTP ? 
+    Current have enable TOTP ?
     """
+    # If user have save the current computer as "sure", don't ask for the otp
     if "saved_computer" in session and session["saved_computer"] == "1":
         return False
     else:
-        user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
-        return user and user.secret
+        # If current app required OTP return true
+        if current_app.otp_required:
+            return True
+        else:
+            # User have enable otp on his account ?
+            user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
+            return user and user.secret
 
-def check_totp(code):
+def check_totp(code, current_app):
     """
     Validate / check OTP.
     - If the TOTP is present in database (secret) check if provided code is valide.
@@ -102,8 +113,11 @@ def check_totp(code):
         elif not user:
             # User not exist
             return False
+        elif current_app.otp_required:
+            # For this app the user should provide a valid code to access
+            return False
         else:
-            # User exist and don't have any secret
+            # User exist and don't have any secret falback
             return True
     else:
         return False
@@ -134,17 +148,17 @@ def login():
         values = json.loads(json_value)
 
         # Get the key in databases
-        key = get_app_key(apps)
-        if key is None:
+        current_app = get_app(apps)
+        if current_app is None:
             # Application key unknown. Abort the request
             return redirect('/error?next=' + next_page)
 
         # Calculate the signature and prepare the data to create the POST values
-        json_value, signature = signed_tab(values, key)
+        json_value, signature = signed_tab(values, current_app.key)
 
         # Test if user need to prodive a OTP Code
-        if require_totp():
-            if totp_value and not check_totp(totp_value):
+        if require_totp(current_app):
+            if totp_value and not check_totp(totp_value, current_app):
                 # Code isn't valid. Abort the connexion
                 return redirect('/error?next=' + next_page)
             elif not totp_value:
