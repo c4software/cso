@@ -113,7 +113,7 @@ def check_totp(code, current_app):
         elif not user:
             # User not exist
             return False
-        elif current_app.otp_required:
+        elif current_app.otp_required == 1:
             # For this app the user should provide a valid code to access
             return False
         else:
