@@ -35,7 +35,7 @@ class Application(Base):
     def __init__(self, nom=None, key=None):
         self.nom = nom
         self.key = key
-        self.otp_required = False
+        self.otp_required = 0
 
     def __repr__(self):
         return '<Application %r>' % (self.nom)
