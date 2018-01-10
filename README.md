@@ -89,7 +89,7 @@ NGINX Configuration :
 
 ## Nginx Setup
 
-Since its not always possible to change the auth mechanism in currents applications, I made a sample configuration to add the CSO on the top layer in most app « the Nginx Proxy server ».
+Its not always possible to change the auth mechanism in currents applications, I made a sample configuration to add the CSO on the top layer in most app « the Nginx Proxy server ».
 
 You have two choices :
 
