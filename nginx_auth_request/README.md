@@ -9,14 +9,14 @@ You have two way to USE CSO + NGINX
 
 ### Quick overview
 
-- Setup the vhost like (nginx_sample_vhost_centralized.conf)[the sample configuration]
+- Setup the vhost like [The Sample Configuration](nginx_sample_vhost_centralized.conf)
 - Go to your website you should be redirect to the CSO. 
 
 ## Standalone setup
 
 ### Quick overview
 
-- Setup the vhost like (nginx_sample_vhost_standalone.conf)[the sample configuration]
+- Setup the vhost like [The Sample Configuration](nginx_sample_vhost_standalone.conf)
 - Start the client ```client.py mWgBV6mKZ3nwhwpvMBxx``` (Python >=2.7).
 - Go to your website you should be redirect to the CSO.
 
