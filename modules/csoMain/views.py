@@ -41,9 +41,9 @@ def ldap_login(username, password, apps):
     # Recuperation des infos utilisateurs en BDD
     user = UserDroit.query.filter(UserDroit.username == username).first()
     if user is None:
-        return_value = {"username": username, "group": "users", "level": 0, "twofactor": session['twofactor'], "key": '', "timeToken": ""}
+        return_value = {"username": username, "group": "users", "level": 0, "twofactor": get_two_factor_level_signin(), "key": '', "timeToken": ""}
     else:
-        return_value = {"username": username, "group": user.group + ",users", "level": user.level, "twofactor": session['twofactor'], "key": '', "timeToken": ""}
+        return_value = {"username": username, "group": user.group + ",users", "level": user.level, "twofactor": get_two_factor_level_signin(), "key": '', "timeToken": ""}
 
     # Calcul du hash de la clef
     json_value, signature = signed_tab(return_value, key)
@@ -55,6 +55,18 @@ def ldap_login(username, password, apps):
     session['values'] = json_value
 
     return (b64_json_value, signature)
+
+def get_two_factor_level_signin():
+    """
+        -	0 => Password Only
+        -	1 => OTP
+        -	2 => U2F
+        -	3 => SMS
+    """
+    if(session['twofactor']):
+        return session['twofactor']
+    else:
+        return "0"
 
 def clear_session():
     """
