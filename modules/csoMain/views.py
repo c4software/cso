@@ -41,9 +41,9 @@ def ldap_login(username, password, apps):
     # Recuperation des infos utilisateurs en BDD
     user = UserDroit.query.filter(UserDroit.username == username).first()
     if user is None:
-        return_value = {"username": username, "group": "users", "level": 0, "key": '', "timeToken": ""}
+        return_value = {"username": username, "group": "users", "level": 0, "twofactor": session['twofactor'], "key": '', "timeToken": ""}
     else:
-        return_value = {"username": username, "group": user.group + ",users", "level": user.level, "key": '', "timeToken": ""}
+        return_value = {"username": username, "group": user.group + ",users", "level": user.level, "twofactor": session['twofactor'], "key": '', "timeToken": ""}
 
     # Calcul du hash de la clef
     json_value, signature = signed_tab(return_value, key)
@@ -63,6 +63,7 @@ def clear_session():
     session.pop('username', None)
     session.pop('values', None)
     session.pop('signature', None)
+    session.pop('twofactor', None)
     session.pop('saved_computer', None)
 
 def signed_tab(tab, key):
@@ -85,7 +86,7 @@ def require_totp(current_app):
     """
     Current have enable TOTP ?
     """
-    # If user have save the current computer as "sure", don't ask for the otp
+    # Si l'utilisateur a sauvegarde l'ordinateur comme etant sur alors, on ne re-demande pas l'OTP
     if "saved_computer" in session and session["saved_computer"] == "1":
         return False
     else:
@@ -158,6 +159,7 @@ def login():
 
         # Test if user need to prodive a OTP Code
         if require_totp(current_app):
+            session["twofactor"] = "0"
             if totp_value and not check_totp(totp_value, current_app):
                 # Code isn't valid. Abort the connexion
                 return redirect('/error?next=' + next_page)
@@ -165,9 +167,12 @@ def login():
                 # OTP required and no OTP, ask for it
                 return render_template("totp.html", next=next_page, apps=apps)
             else:
+                session["twofactor"] = "1"
                 # If the code is valide, check if user choose to save the current computer.
                 if save_computer == "1":
                     session["saved_computer"] = "1"
+        else:
+            session["twofactor"] = "0"
 
         # Calculate the base64 representation to transmit safely
         return render_template("redirection.html",
