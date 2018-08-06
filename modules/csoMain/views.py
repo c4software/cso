@@ -220,7 +220,7 @@ def process_login():
             ldap_login(username, password, apps)
             logging.info("Success for {} from {}".format(username, request.remote_addr))
         except Exception as e:
-            logging.info("Error for {} from {}".format(username, request.remote_addr))
+            logging.info("Error for {} from {} ({})".format(username, request.remote_addr, e))
             return redirect('/error?next=' + next_page)
 
     return redirect('/login?next='+next_page+"&apps="+apps)

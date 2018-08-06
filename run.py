@@ -3,17 +3,25 @@ Main file of CSO application
 """
 
 import uuid
+import logging
+from parameters import log_path
 from flask import Flask, render_template, request, session, abort
 from modules.csoMain.views import csoMain
 from modules.csoGestion.views import csoGestion
 from modules.csoNginx.views import csoNginx
-import logging
 
 app = Flask(__name__)
 app.secret_key = "9jHy6lAOxBKzhbY3eeGRB1i5pbnqgA58XDm07xXTPxfZUzcPq9r7+SKYJseosjMF6lk=" #uuid.uuid4().hex
 
 # Log
-logging.basicConfig(level=logging.INFO)
+if log_path:
+    logging.basicConfig(filename=log_path, level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+else:
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+
+app.logger.disabled = True
+log = logging.getLogger('werkzeug')
+log.disabled = True
 
 # Register des modules
 app.register_blueprint(csoMain)
