@@ -7,6 +7,7 @@ import hashlib
 import base64
 import time
 import pyotp
+import logging
 from flask import render_template, Blueprint, redirect, request, session, Response
 import ldap
 from models import Application, UserDroit
@@ -151,7 +152,7 @@ def login():
     next_page = request.args.get('next', "")
     apps = request.args.get('apps', "default")
     totp_value = request.form.get('totp', "").replace(" ", "")
-    save_computer = request.form.get("save_computer", "0");
+    save_computer = request.form.get("save_computer", "0")
     error_message = session.pop('error', "")
 
     # Si la personne est connecte alors ==> On redirige.
@@ -210,12 +211,16 @@ def process_login():
     username = request.form.get('username', '')
     password = request.form.get('password', '')
 
+    logging.info("New Connexion {} from {}".format(username, request.remote_addr))
+
     # If username and password is present
     if username and password:
         # Bind the user
         try:
             ldap_login(username, password, apps)
+            logging.info("Success for {} from {}".format(username, request.remote_addr))
         except Exception as e:
+            logging.info("Error for {} from {}".format(username, request.remote_addr))
             return redirect('/error?next=' + next_page)
 
     return redirect('/login?next='+next_page+"&apps="+apps)
