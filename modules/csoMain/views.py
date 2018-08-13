@@ -139,8 +139,12 @@ def check_totp(code, current_app):
 
 @csoMain.route("/")
 def main():
-    """ Nothing on / """
-    return ""
+    return render_template("me.html")
+
+@csoMain.route("/password")
+def password():
+    return render_template("password.html")
+
 
 @csoMain.route("/login", methods=["GET", "POST"])
 def login():

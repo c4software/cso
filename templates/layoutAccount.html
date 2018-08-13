@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8" />
+	<title>Mon profil</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+	<link rel="stylesheet" href="/static/styles/bootstrap-material-design.min.css">
+	<style>
+		html, body {
+			height: 100%;
+		}
+		body{
+			padding-top: 3.5rem;
+		}
+		a.nav-link {
+			color: rgba(0,0,0,.65);
+		}
+	</style>
+
+	<script src="/static/scripts/qrcode.min.js"></script>
+	<script src="/static/scripts/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="/">Mon profil</a>
+		<ul class="navbar-nav flex-row ml-md-auto d-md-flex">
+			<li class="nav-item"><a class="nav-link" href="/logout?next=http://www.google.com">D&eacute;connexion</a></li>
+		</ul>
+	</nav>
+	<div class="container-fluid">
+        <div class="col-sm-12 ml-sm-auto col-md-12 pt-3">
+            {% block body %}{% endblock %}
+        </div>
+	</div>
+</body>
+</html>

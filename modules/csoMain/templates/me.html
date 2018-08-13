@@ -1,0 +1,45 @@
+<!-- Page de détail utilisateur -->
+{% extends "layoutAccount.html" %}
+
+{% block body %}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Vos informations</h5>
+    </div>
+    <div class="card-body">
+        
+        <div class="row">
+            <div class="col">
+                <b>Nom</b>
+            </div>
+            <div class="col">
+                <div style="padding: 8px">Valentin</div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <b>Mot de passe</b>
+            </div>
+            <div class="col">
+                <a href="/password" class="btn btn-sm btn-primary ma-0">Modifier mon mot de passe</a>            
+            </div>
+        </div>
+        
+        <div class="pt-2">
+        </div>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h5 class="card-title">Authentification multi-facteurs</h5>
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-raised btn-warning">Désactiver l'OTP</button>
+        <button type="button" class="btn btn-raised btn-primary">Activer l'U2F</button>
+    </div>
+</div>
+
+{% endblock %}
