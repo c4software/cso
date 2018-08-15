@@ -64,7 +64,7 @@ def get_two_factor_level_signin():
         -	2 => U2F
         -	3 => SMS
     """
-    if(session['twofactor']):
+    if "twofactor" in session:
         return session['twofactor']
     else:
         return "0"
@@ -78,6 +78,7 @@ def clear_session():
     session.pop('signature', None)
     session.pop('twofactor', None)
     session.pop('saved_computer', None)
+    session.pop('topt_value', None)
 
 def signed_tab(tab, key):
     """Calcul de la signature de l'array"""
@@ -139,7 +140,10 @@ def check_totp(code, current_app):
 
 @csoMain.route("/")
 def main():
-    return render_template("me.html")
+    if "username" in session:
+        return render_template("me.html", username=session["username"])
+    else:
+        return redirect('/error')
 
 @csoMain.route("/password")
 def password():
@@ -158,6 +162,10 @@ def login():
     totp_value = request.form.get('totp', "").replace(" ", "")
     save_computer = request.form.get("save_computer", "0")
     error_message = session.pop('error', "")
+
+    # Since the OTP code can be set in the main login form, get the save value from session.
+    if "topt_value" in session:
+        totp_value = session.pop('topt_value', None)
 
     # Si la personne est connecte alors ==> On redirige.
     if "username" in session:
@@ -226,6 +234,9 @@ def process_login():
         except Exception as e:
             logging.info("Error for {} from {} ({})".format(username, request.remote_addr, e))
             return redirect('/error?next=' + next_page)
+
+    # Save the provided OTP code for next redirection
+    session["topt_value"] = request.form.get('totp', "").replace(" ", "")
 
     return redirect('/login?next='+next_page+"&apps="+apps)
 
