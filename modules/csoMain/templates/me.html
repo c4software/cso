@@ -37,8 +37,13 @@
         <h5 class="card-title">Authentification multi-facteurs</h5>
     </div>
     <div class="card-body">
-        <button type="button" class="btn btn-raised btn-warning">Désactiver l'OTP</button>
-        <button type="button" class="btn btn-raised btn-primary">Activer l'U2F</button>
+        
+        {% if has_otp_enabled %}
+            <button type="button" class="btn btn-raised btn-warning">Désactiver l'OTP</button>
+        {% else %}
+            <button type="button" class="btn btn-raised btn-primary">Activer l'OTP</button>
+        {% endif %}
+
     </div>
 </div>
 

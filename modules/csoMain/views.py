@@ -12,8 +12,10 @@ from flask import render_template, Blueprint, redirect, request, session, Respon
 import ldap
 from models import Application, UserDroit
 from parameters import default_website, ldap_server, ldap_dn
+from utils.user import has_otp_enabled, is_connected
 
 csoMain = Blueprint('csoMain', __name__, template_folder='templates')
+
 
 def get_app(app_name):
     """
@@ -24,6 +26,7 @@ def get_app(app_name):
         return app
     else:
         return None
+
 
 def ldap_login(username, password, apps):
     """
@@ -57,6 +60,7 @@ def ldap_login(username, password, apps):
 
     return (b64_json_value, signature)
 
+
 def get_two_factor_level_signin():
     """
         -	0 => Password Only
@@ -69,6 +73,7 @@ def get_two_factor_level_signin():
     else:
         return "0"
 
+
 def clear_session():
     """
     Clear all user data in session
@@ -79,6 +84,7 @@ def clear_session():
     session.pop('twofactor', None)
     session.pop('saved_computer', None)
     session.pop('topt_value', None)
+
 
 def signed_tab(tab, key):
     """Calcul de la signature de l'array"""
@@ -94,7 +100,8 @@ def signed_tab(tab, key):
     # Conversion de l'array en JSON
     json_value = json.dumps(tab, separators=(',', ':'))
 
-    return (json_value, signature)
+    return json_value, signature
+
 
 def require_totp(current_app):
     """
@@ -109,8 +116,8 @@ def require_totp(current_app):
             return True
         else:
             # User have enable otp on his account ?
-            user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
-            return user and user.secret
+            return has_otp_enabled()
+
 
 def check_totp(code, current_app):
     """
@@ -118,7 +125,7 @@ def check_totp(code, current_app):
     - If the TOTP is present in database (secret) check if provided code is valide.
     - If user exist and no OTP continue.
     """
-    if "username" in session:
+    if is_connected():
         # Find the user in database.
         user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
         if user and user.secret:
@@ -140,15 +147,18 @@ def check_totp(code, current_app):
 
 @csoMain.route("/")
 def main():
-    if "username" in session:
-        return render_template("me.html", username=session["username"])
+    if is_connected():
+        return render_template("me.html", username=session["username"], has_otp_enabled=has_otp_enabled())
     else:
         return redirect('/error')
 
+
 @csoMain.route("/password")
 def password():
-    return render_template("password.html")
-
+    if is_connected():
+        return render_template("password.html")
+    else:
+        return redirect('/error')
 
 @csoMain.route("/login", methods=["GET", "POST"])
 def login():
@@ -168,7 +178,7 @@ def login():
         totp_value = session.pop('topt_value', None)
 
     # Si la personne est connecte alors ==> On redirige.
-    if "username" in session:
+    if is_connected():
         # Get the login values in session
         json_value = session['values']
         values = json.loads(json_value)
@@ -212,6 +222,7 @@ def login():
                                apps=apps,
                                error=error_message)
 
+
 @csoMain.route("/doLogin", methods=['POST', 'GET'])
 def process_login():
     """
@@ -240,6 +251,7 @@ def process_login():
 
     return redirect('/login?next='+next_page+"&apps="+apps)
 
+
 @csoMain.route("/error", methods=['POST', 'GET'])
 def error():
     """
@@ -250,18 +262,20 @@ def error():
     clear_session()
     return render_template("error.html", message=message, next=next_page)
 
+
 @csoMain.route("/islogin", methods=['GET'])
 def is_login():
     """
-    Test if user is currently logged-in (and use jsonp to use avoid CORS)
+    Test if user is currently logged-in (Use jsonp to use avoid CORS)
     """
     callback = request.args.get('callback', "callback")
-    if "username" in session:
+    if is_connected:
         resp = callback+"({\"data\":true})"
     else:
         resp = callback+"({\"data\":false})"
 
     return Response(response=resp, status=200, mimetype="application/javascript")
+
 
 @csoMain.route("/logout", methods=['POST', 'GET'])
 def logout():
@@ -269,10 +283,11 @@ def logout():
     Display the logout request to the user
     """
     next_page = request.args.get('next', "")
-    if "username" not in session:
+    if is_connected:
         return redirect(next_page)
     else:
         return render_template("logout.html", next=next_page)
+
 
 @csoMain.route("/logoutApps", methods=['POST', 'GET'])
 def logout_apps():
@@ -281,6 +296,7 @@ def logout_apps():
     """
     next_page = request.form.get('next', "")
     return redirect(next_page)
+
 
 @csoMain.route("/logoutAll", methods=['POST', 'GET'])
 def logout_all():
