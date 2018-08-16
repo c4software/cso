@@ -7,6 +7,8 @@ import pyotp
 import logging
 import ldap
 import ldap.modlist as modlist
+import sha 
+from base64 import b64encode 
 from flask import session
 from parameters import default_website, ldap_server, ldap_dn
 from models import UserDroit, Application
@@ -23,16 +25,17 @@ def change_password(old_password, new_password):
     logging.info("{0} try to change is password".format(session["username"]))
     try:
         ldap_connector = get_ldap_connector_as(session["username"], old_password)
-
-        newpassword = unicode('\"' + new_password + '\"').encode('utf-16-le')
-        oldpassword = unicode('\"' + old_password + '\"').encode('utf-16-le')
-        pass_mod = [(ldap.MOD_DELETE, 'unicodePwd', [oldpassword]), (ldap.MOD_ADD, 'unicodePwd', [newpassword])]
-        result = ldap_connector.modify_s(ldap_dn.format(session["username"]), pass_mod)
-        
+        #new_password = unicode('\"' + new_password + '\"').encode('utf-16-le')
+        #ctx = sha.new(new_password) 
+        #new_password = "{SHA}" + b64encode(ctx.digest())
+        ldap_connector.passwd_s(ldap_dn.format(session["username"]), None, new_password)
+        # pass_mod = ldap.modlist.modifyModlist(old_password, new_password)
+        # result = ldap_connector.modify_s(ldap_dn.format(session["username"]), pass_mod)
         ldap_connector.unbind_s()
+        return True, ""
     except Exception as e:
         logging.info("{0} error while password change (Error: {1})".format(session["username"], e))
-        return False
+        return False, e
 
 def check_totp(code, current_app):
     """

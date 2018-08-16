@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 This module manage all of the login / logout user workflow
 """
@@ -8,7 +10,7 @@ import base64
 import time
 import pyotp
 import logging
-from flask import render_template, Blueprint, redirect, request, session, Response
+from flask import render_template, Blueprint, redirect, request, session, Response, flash
 import ldap
 from models import Application, UserDroit
 from parameters import default_website, ldap_server, ldap_dn
@@ -33,7 +35,12 @@ def password():
         new_password = request.form.get('new_password', "")
         
         if old_password and new_password:
-            result = change_password(old_password, new_password)
+            status, message = change_password(old_password, new_password)
+            if not status:
+                flash("Erreur lors du changement de mot de passe ({})".format(message))
+                return redirect("/password")
+            else:
+                return redirect("/")
 
         return render_template("password.html")
     else:
