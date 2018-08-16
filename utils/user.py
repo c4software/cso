@@ -6,6 +6,7 @@ import time
 import pyotp
 import logging
 import ldap
+import ldap.modlist as modlist
 from flask import session
 from parameters import default_website, ldap_server, ldap_dn
 from models import UserDroit, Application
@@ -23,14 +24,12 @@ def change_password(old_password, new_password):
     try:
         ldap_connector = get_ldap_connector_as(session["username"], old_password)
 
-        # Change password
-        #unicode_pass = unicode('\"' + str(new_password) + '\"', 'iso-8859-1')
-        #password_value = unicode_pass.encode('utf-16-le')
-        #add_pass = [(ldap.MOD_REPLACE, 'unicodePwd', [password_value])]
-        #ldap_connector.modify_s(user_dn,add_pass)
+        newpassword = unicode('\"' + new_password + '\"').encode('utf-16-le')
+        oldpassword = unicode('\"' + old_password + '\"').encode('utf-16-le')
+        pass_mod = [(ldap.MOD_DELETE, 'unicodePwd', [oldpassword]), (ldap.MOD_ADD, 'unicodePwd', [newpassword])]
+        result = ldap_connector.modify_s(ldap_dn.format(session["username"]), pass_mod)
         
         ldap_connector.unbind_s()
-
     except Exception as e:
         logging.info("{0} error while password change (Error: {1})".format(session["username"], e))
         return False

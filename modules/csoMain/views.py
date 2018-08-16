@@ -12,7 +12,7 @@ from flask import render_template, Blueprint, redirect, request, session, Respon
 import ldap
 from models import Application, UserDroit
 from parameters import default_website, ldap_server, ldap_dn
-from utils.user import has_otp_enabled, is_connected, check_totp, clear_session, ldap_login, signed_tab, require_totp
+from utils.user import has_otp_enabled, is_connected, check_totp, clear_session, ldap_login, signed_tab, require_totp, change_password
 from utils.app import get_app
 
 csoMain = Blueprint('csoMain', __name__, template_folder='templates')
@@ -25,9 +25,16 @@ def main():
         return redirect('/login?apps=admin&next=/')
 
 
-@csoMain.route("/password")
+@csoMain.route("/password", methods=["GET", "POST"])
 def password():
     if is_connected():
+
+        old_password = request.form.get('old_password', "")
+        new_password = request.form.get('new_password', "")
+        
+        if old_password and new_password:
+            result = change_password(old_password, new_password)
+
         return render_template("password.html")
     else:
         return redirect('/login?apps=admin&next=/')
