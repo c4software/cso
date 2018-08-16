@@ -81,6 +81,7 @@ def get_ldap_connector_as(username, password):
     """
     ldap_connector = ldap.initialize(ldap_server)
     ldap_connector.simple_bind_s(ldap_dn.format(username), password)
+    # data = ldap_connector.search_s(ldap_dn.format(username), ldap.SCOPE_SUBTREE, '(uid=*)', ['uid', 'pwdChangedTime'])
     return ldap_connector
 
 def ldap_login(username, password, apps):
