@@ -81,7 +81,7 @@ def ldap_bind_as(username, password):
     try:
         data = ldap_connector.search_s(ldap_dn.format(username), ldap.SCOPE_SUBTREE, '(uid=*)', ['uid', 'pwdMaxAge'])
     except Exception as e:
-        # In case of error, do nothing...
+        # In case of error, do nothing... For now... Since my LDAP didn't return the field, i consider it as non mandatory
         pass
 
     # Checke the "pwdMaxAge" field, if its 0 (or lower ?) trigger an exception to handle the password change during
