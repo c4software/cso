@@ -1,0 +1,2 @@
+class PasswordToOldException(Exception):
+    pass

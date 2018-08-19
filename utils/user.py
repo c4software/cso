@@ -13,6 +13,7 @@ from flask import session
 from parameters import default_website, ldap_server, ldap_dn
 from models import UserDroit, Application
 from utils.app import get_app
+from utils.exceptions import PasswordToOldException
 
 def is_connected():
     return "username" in session
@@ -74,6 +75,20 @@ def ldap_bind_as(username, password):
     """
     ldap_connector = get_ldap_connector_as(username, password)
     ldap_connector.unbind_s()
+    
+    # Get the remaining validity time for the current password
+    data = []
+    try:
+        data = ldap_connector.search_s(ldap_dn.format(username), ldap.SCOPE_SUBTREE, '(uid=*)', ['uid', 'pwdMaxAge'])
+    except Exception as e:
+        # In case of error, do nothing...
+        pass
+
+    # Checke the "pwdMaxAge" field, if its 0 (or lower ?) trigger an exception to handle the password change during
+    # the login.
+    if "pwdMaxAge" in data:
+        if data["pwdMaxAge"] <= 0:
+            raise PasswordToOldException("User password is to old. Renew needed")
 
 def get_ldap_connector_as(username, password):
     """
@@ -81,7 +96,6 @@ def get_ldap_connector_as(username, password):
     """
     ldap_connector = ldap.initialize(ldap_server)
     ldap_connector.simple_bind_s(ldap_dn.format(username), password)
-    # data = ldap_connector.search_s(ldap_dn.format(username), ldap.SCOPE_SUBTREE, '(uid=*)', ['uid', 'pwdChangedTime'])
     return ldap_connector
 
 def ldap_login(username, password, apps):
@@ -94,7 +108,12 @@ def ldap_login(username, password, apps):
     else:
         key = None
 
-    ldap_bind_as(username, password)
+    try:
+        ldap_bind_as(username, password)
+    except PasswordToOldException as e:
+            # User password is to old, need to be renewed
+            logging.info("Password expired for {}.".format(username))
+            session["password_expired"] = 1
 
     # Recuperation des infos utilisateurs en BDD
     user = UserDroit.query.filter(UserDroit.username == username).first()
@@ -138,6 +157,7 @@ def clear_session():
     session.pop('twofactor', None)
     session.pop('saved_computer', None)
     session.pop('topt_value', None)
+    session.pop('password_expired', None)
 
 
 def signed_tab(tab, key):

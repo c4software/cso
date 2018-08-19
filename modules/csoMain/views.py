@@ -16,11 +16,15 @@ from models import Application, UserDroit
 from parameters import default_website, ldap_server, ldap_dn
 from utils.user import has_otp_enabled, is_connected, check_totp, clear_session, ldap_login, signed_tab, require_totp, change_password
 from utils.app import get_app
+from utils.exceptions import PasswordToOldException
 
 csoMain = Blueprint('csoMain', __name__, template_folder='templates')
 
 @csoMain.route("/", methods=["GET", "POST"])
 def main():
+    """
+    User profil page (if connected)
+    """
     if is_connected():
         return render_template("me.html", username=session["username"], has_otp_enabled=has_otp_enabled())
     else:
@@ -28,19 +32,36 @@ def main():
 
 
 @csoMain.route("/password", methods=["GET", "POST"])
-def password():
+def passwordRenew():
+    """
+    Handle the password change
+    GET : next & apps are requested 'redirection' after password change (used if password change is triggered after a login)
+    """
     if is_connected():
-
         old_password = request.form.get('old_password', "")
         new_password = request.form.get('new_password', "")
+
+        next_page = request.args.get('next', None)
+        apps = request.args.get('apps', None)
         
         if old_password and new_password:
             status, message = change_password(old_password, new_password)
             if not status:
+                # Changing password failure
                 flash("Erreur lors du changement de mot de passe ({})".format(message))
-                return redirect("/password")
+                # Next page is specified ? Keep it for further redirection.
+                if next_page:
+                    return redirect("/password?next={}&apps={}".format(next_page, apps))
+                else:
+                    return redirect("/password")
             else:
-                return redirect("/")
+                # Changing password success
+                session.pop('force_renew_password', None)
+                # If Next page is specified, redirect to the requested app and url
+                if next_page:
+                    return redirect("/login?next={}&apps={}".format(next_page, apps))
+                else:
+                    return redirect("/")
 
         return render_template("password.html")
     else:
@@ -95,12 +116,17 @@ def login():
         else:
             session["twofactor"] = "0"
 
-        # Calculate the base64 representation to transmit safely
-        return render_template("redirection.html",
-                               next=next_page,
-                               apps=apps,
-                               values=base64.b64encode(json_value),
-                               signature=signature)
+        # Final test, user password is expired ?
+        if "password_expired" in session:
+            flash("Vous devez changer votre mot de passe pour continuer.")
+            return redirect("/password?next={}&apps={}".format(next_page, apps))
+        else:
+            # Calculate the base64 representation to transmit safely
+            return render_template("redirection.html",
+                                next=next_page,
+                                apps=apps,
+                                values=base64.b64encode(json_value),
+                                signature=signature)
     else:
         # User not logged, display the login page.
         return render_template("login.html",
@@ -129,13 +155,14 @@ def process_login():
             ldap_login(username, password, apps)
             logging.info("Success for {} from {}".format(username, request.remote_addr))
         except Exception as e:
+            # Can't bind
             logging.info("Error for {} from {} ({})".format(username, request.remote_addr, e))
             return redirect('/error?next=' + next_page)
 
     # Save the provided OTP code for next redirection
     session["topt_value"] = request.form.get('totp', "").replace(" ", "")
 
-    return redirect('/login?next='+next_page+"&apps="+apps)
+    return redirect("/login?next={}&apps={}".format(next_page, apps))
 
 
 @csoMain.route("/error", methods=['POST', 'GET'])
