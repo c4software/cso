@@ -44,6 +44,12 @@ def logout():
     return render_template('disconnect.html')
 
 
+@csoGestion.route("/user/forceChangePassword")
+@login_required
+def request_password_change():
+    return render_template('requestPasswordChange.html')
+
+
 @csoGestion.route("/secret/list")
 @login_required
 def list_secret():
