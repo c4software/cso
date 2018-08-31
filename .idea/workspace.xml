@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15fe6511-4254-447a-b330-b2a6355c922a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CSO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CSO.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/csoMain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/csoMain/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/user.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/CSO$CSO.coverage" NAME="CSO Coverage Results" MODIFIED="1535700450901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/CSO$CSO.coverage" NAME="CSO Coverage Results" MODIFIED="1535701279913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1982967184">
@@ -30,23 +28,33 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="58" />
+          <entry key="py" value="138" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="58" />
+          <entry key="Python" value="138" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="3" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/csoMain/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+            <state relative-caret-position="210">
+              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
               <folding>
                 <element signature="e#25#91#1" />
                 <element signature="e#729#968#0" />
@@ -88,6 +96,67 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/user.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="363">
+              <caret line="94" selection-start-line="94" selection-end-line="94" />
+              <folding>
+                <element signature="e#415#443#0" />
+                <element signature="e#472#584#0" />
+                <element signature="e#639#1443#0" />
+                <element signature="e#730#1292#0" />
+                <element signature="e#812#883#0" />
+                <element signature="e#1077#1144#0" />
+                <element signature="e#1328#1443#0" />
+                <element signature="e#1484#1995#0" />
+                <element signature="e#1484#1646#1" />
+                <element signature="e#1678#1964#0" />
+                <element signature="e#1781#1867#0" />
+                <element signature="e#1894#1964#0" />
+                <element signature="e#2025#2381#0" />
+                <element signature="e#2025#2098#1" />
+                <element signature="e#2221#2325#0" />
+                <element signature="e#2344#2381#0" />
+                <element signature="e#2425#2504#1" />
+                <element signature="e#2842#2969#0" />
+                <element signature="e#3301#3525#0" />
+                <element signature="e#3301#3380#1" />
+                <element signature="e#3573#3614#1" />
+                <element signature="e#4609#4680#0" />
+                <element signature="e#4872#5065#0" />
+                <element signature="e#4872#4969#1" />
+                <element signature="e#5093#5393#0" />
+                <element signature="e#5093#5139#1" />
+                <element signature="e#5426#5961#0" />
+                <element signature="e#5674#5747#0" />
+                <element signature="e#5999#6471#0" />
+                <element signature="e#5999#6046#1" />
+                <element signature="e#6258#6471#0" />
+                <element signature="e#6387#6471#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-290">
+              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="248">
+              <caret line="229" column="25" lean-forward="true" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -97,6 +166,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/modules/csoMain/views.py" />
+        <option value="$PROJECT_DIR$/run.py" />
+        <option value="$PROJECT_DIR$/utils/user.py" />
       </list>
     </option>
   </component>
@@ -147,7 +218,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="collapse&#9;ACTION&#9;CollapseAllRegions" />
+    <property name="SearchEverywhereHistoryKey" value="collaps&#9;ACTION&#9;CollapseAllRegions&#10;collapse&#9;ACTION&#9;CollapseAllRegions" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -168,12 +239,15 @@
   </component>
   <component name="RunManager">
     <configuration name="CSO" type="Python.FlaskServer" factoryName="Flask server">
+      <option name="additionalOptions" value="" />
+      <option name="application" value="" />
+      <option name="flaskDebug" value="true" />
       <module name="CSO" />
       <option name="target" value="$PROJECT_DIR$/run.py" />
       <option name="targetType" value="PATH" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$USER_HOME$/venv/cso/bin/python" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -206,7 +280,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32919255" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39958593" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -214,8 +288,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32919255" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32919255" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -230,10 +304,17 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file:///usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="229" column="25" lean-forward="true" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/csoMain/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+        <state relative-caret-position="210">
+          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
           <folding>
             <element signature="e#25#91#1" />
             <element signature="e#729#968#0" />
@@ -270,6 +351,54 @@
             <element signature="e#7517#7613#1" />
             <element signature="e#7768#7937#0" />
             <element signature="e#7768#7841#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-290">
+          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
+          <folding>
+            <element signature="e#415#443#0" />
+            <element signature="e#472#584#0" />
+            <element signature="e#639#1443#0" />
+            <element signature="e#730#1292#0" />
+            <element signature="e#812#883#0" />
+            <element signature="e#1077#1144#0" />
+            <element signature="e#1328#1443#0" />
+            <element signature="e#1484#1995#0" />
+            <element signature="e#1484#1646#1" />
+            <element signature="e#1678#1964#0" />
+            <element signature="e#1781#1867#0" />
+            <element signature="e#1894#1964#0" />
+            <element signature="e#2025#2381#0" />
+            <element signature="e#2025#2098#1" />
+            <element signature="e#2221#2325#0" />
+            <element signature="e#2344#2381#0" />
+            <element signature="e#2425#2504#1" />
+            <element signature="e#2842#2969#0" />
+            <element signature="e#3301#3525#0" />
+            <element signature="e#3301#3380#1" />
+            <element signature="e#3573#3614#1" />
+            <element signature="e#4609#4680#0" />
+            <element signature="e#4872#5065#0" />
+            <element signature="e#4872#4969#1" />
+            <element signature="e#5093#5393#0" />
+            <element signature="e#5093#5139#1" />
+            <element signature="e#5426#5961#0" />
+            <element signature="e#5674#5747#0" />
+            <element signature="e#5999#6471#0" />
+            <element signature="e#5999#6046#1" />
+            <element signature="e#6258#6471#0" />
+            <element signature="e#6387#6471#0" />
           </folding>
         </state>
       </provider>

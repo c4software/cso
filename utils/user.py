@@ -15,12 +15,15 @@ from models import UserDroit, Application
 from utils.app import get_app
 from utils.exceptions import PasswordToOldException
 
+
 def is_connected():
     return "username" in session
+
 
 def has_otp_enabled():
     user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
     return user and user.secret
+
 
 def change_password(old_password, new_password):
     logging.info("{0} try to change is password".format(session["username"]))
@@ -37,6 +40,7 @@ def change_password(old_password, new_password):
     except Exception as e:
         logging.info("{0} error while password change (Error: {1})".format(session["username"], e))
         return False, e
+
 
 def check_totp(code, current_app):
     """
@@ -56,6 +60,7 @@ def check_totp(code, current_app):
     else:
         return False
 
+
 def is_opt_valid(code):
     """
     Function to check if the provided OTP code is a valid one
@@ -68,6 +73,7 @@ def is_opt_valid(code):
     else:
         # User not exist
         return False
+
 
 def ldap_bind_as(username, password):
     """
@@ -90,6 +96,7 @@ def ldap_bind_as(username, password):
         if data["pwdMaxAge"] <= 0:
             raise PasswordToOldException("User password is to old. Renew needed")
 
+
 def get_ldap_connector_as(username, password):
     """
     Try to BIND the username / password couple with the LDAP server
@@ -97,6 +104,7 @@ def get_ldap_connector_as(username, password):
     ldap_connector = ldap.initialize(ldap_server)
     ldap_connector.simple_bind_s(ldap_dn.format(username), password)
     return ldap_connector
+
 
 def ldap_login(username, password, apps):
     """

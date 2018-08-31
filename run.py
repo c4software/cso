@@ -4,8 +4,10 @@ Main file of CSO application
 
 import uuid
 import logging
+from datetime import timedelta
+
 from parameters import log_path
-from flask import Flask, render_template, request, session, abort
+from flask import Flask, request, session, abort
 from modules.csoMain.views import csoMain
 from modules.csoGestion.views import csoGestion
 from modules.csoNginx.views import csoNginx
@@ -28,6 +30,7 @@ app.register_blueprint(csoMain)
 app.register_blueprint(csoGestion, url_prefix='/admin')
 app.register_blueprint(csoNginx, url_prefix='/nginx')
 
+
 @app.before_request
 def csrf_protect():
     """
@@ -38,6 +41,13 @@ def csrf_protect():
         if not token or token != request.form.get('_csrf_token'):
             abort(403)
 
+    """
+    Gestion de la session
+    """
+    session.permanent = False
+    app.permanent_session_lifetime = timedelta(hours=12)
+
+
 def generate_csrf_token():
     """
     Function to generate a new csrf_token
@@ -46,11 +56,13 @@ def generate_csrf_token():
         session['_csrf_token'] = uuid.uuid4().hex
     return session['_csrf_token']
 
+
 # Inject the function into jinja available function
 app.jinja_env.globals['csrf_token'] = generate_csrf_token
+
 
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run(host="0.0.0.0", debug=True)
-    
+
