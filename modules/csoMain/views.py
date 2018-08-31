@@ -32,7 +32,7 @@ def main():
 
 
 @csoMain.route("/password", methods=["GET", "POST"])
-def passwordRenew():
+def password_renew():
     """
     Handle the password change
     GET : next & apps are requested 'redirection' after password change (used if password change is triggered after a login)
@@ -66,6 +66,7 @@ def passwordRenew():
         return render_template("password.html")
     else:
         return redirect('/login?apps=admin&next=/')
+
 
 @csoMain.route("/login", methods=["GET", "POST"])
 def login():

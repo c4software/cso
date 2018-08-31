@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15fe6511-4254-447a-b330-b2a6355c922a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/CSO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CSO.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/csoMain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/csoMain/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -10,36 +13,76 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/CSO$CSO.coverage" NAME="CSO Coverage Results" MODIFIED="1535700450901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1982967184">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="56" />
+          <entry key="py" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="56" />
+          <entry key="Python" value="58" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/csoMain/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2947">
-              <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+            <state relative-caret-position="195">
+              <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
               <folding>
-                <element signature="e#68#79#0" expanded="true" />
+                <element signature="e#25#91#1" />
+                <element signature="e#729#968#0" />
+                <element signature="e#729#776#1" />
+                <element signature="e#1049#2500#0" />
+                <element signature="e#1049#1216#1" />
+                <element signature="e#1248#2438#0" />
+                <element signature="e#1521#2389#0" />
+                <element signature="e#1626#2007#0" />
+                <element signature="e#2042#2389#0" />
+                <element signature="e#2569#5325#0" />
+                <element signature="e#2569#2691#1" />
+                <element signature="e#3220#5078#0" />
+                <element signature="e#3449#3549#0" />
+                <element signature="e#3801#4426#0" />
+                <element signature="e#3915#4014#0" />
+                <element signature="e#4064#4180#0" />
+                <element signature="e#4215#4426#0" />
+                <element signature="e#4584#4727#0" />
+                <element signature="e#4754#5078#0" />
+                <element signature="e#5097#5325#0" />
+                <element signature="e#5405#6375#0" />
+                <element signature="e#5405#5447#1" />
+                <element signature="e#5802#6175#0" />
+                <element signature="e#5843#5968#0" />
+                <element signature="e#6012#6175#0" />
+                <element signature="e#6445#6730#0" />
+                <element signature="e#6445#6489#1" />
+                <element signature="e#6797#7137#0" />
+                <element signature="e#6797#6878#1" />
+                <element signature="e#7209#7436#0" />
+                <element signature="e#7209#7263#1" />
+                <element signature="e#7517#7689#0" />
+                <element signature="e#7517#7613#1" />
+                <element signature="e#7768#7937#0" />
+                <element signature="e#7768#7841#1" />
               </folding>
             </state>
           </provider>
@@ -65,7 +108,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="22" />
-    <option name="width" value="1920" />
+    <option name="width" value="1440" />
     <option name="height" value="878" />
   </component>
   <component name="ProjectView">
@@ -73,7 +116,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -101,13 +143,16 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="collapse&#9;ACTION&#9;CollapseAllRegions" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -152,29 +197,30 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="878" extended-state="6" />
+    <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19382322" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32919255" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,10 +232,44 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/modules/csoMain/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2947">
-          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+        <state relative-caret-position="195">
+          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
           <folding>
-            <element signature="e#68#79#0" expanded="true" />
+            <element signature="e#25#91#1" />
+            <element signature="e#729#968#0" />
+            <element signature="e#729#776#1" />
+            <element signature="e#1049#2500#0" />
+            <element signature="e#1049#1216#1" />
+            <element signature="e#1248#2438#0" />
+            <element signature="e#1521#2389#0" />
+            <element signature="e#1626#2007#0" />
+            <element signature="e#2042#2389#0" />
+            <element signature="e#2569#5325#0" />
+            <element signature="e#2569#2691#1" />
+            <element signature="e#3220#5078#0" />
+            <element signature="e#3449#3549#0" />
+            <element signature="e#3801#4426#0" />
+            <element signature="e#3915#4014#0" />
+            <element signature="e#4064#4180#0" />
+            <element signature="e#4215#4426#0" />
+            <element signature="e#4584#4727#0" />
+            <element signature="e#4754#5078#0" />
+            <element signature="e#5097#5325#0" />
+            <element signature="e#5405#6375#0" />
+            <element signature="e#5405#5447#1" />
+            <element signature="e#5802#6175#0" />
+            <element signature="e#5843#5968#0" />
+            <element signature="e#6012#6175#0" />
+            <element signature="e#6445#6730#0" />
+            <element signature="e#6445#6489#1" />
+            <element signature="e#6797#7137#0" />
+            <element signature="e#6797#6878#1" />
+            <element signature="e#7209#7436#0" />
+            <element signature="e#7209#7263#1" />
+            <element signature="e#7517#7689#0" />
+            <element signature="e#7517#7613#1" />
+            <element signature="e#7768#7937#0" />
+            <element signature="e#7768#7841#1" />
           </folding>
         </state>
       </provider>
