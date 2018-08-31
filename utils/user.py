@@ -27,14 +27,19 @@ def has_otp_enabled():
     return user and user.secret
 
 
-def change_password(old_password, new_password):
+def change_password(old_password, new_password, for_username=None):
     logging.info("{0} try to change is password".format(session["username"]))
     try:
         ldap_connector = get_ldap_connector_as(session["username"], old_password)
+
         #new_password = unicode('\"' + new_password + '\"').encode('utf-16-le')
         #ctx = sha.new(new_password) 
         #new_password = "{SHA}" + b64encode(ctx.digest())
-        ldap_connector.passwd_s(ldap_dn.format(session["username"]), None, new_password)
+        if for_username:
+            ldap_connector.passwd_s(ldap_dn.format(for_username), None, new_password)
+        else:
+            ldap_connector.passwd_s(ldap_dn.format(session["username"]), None, new_password)
+
         # pass_mod = ldap.modlist.modifyModlist(old_password, new_password)
         # result = ldap_connector.modify_s(ldap_dn.format(session["username"]), pass_mod)
         ldap_connector.unbind_s()
@@ -233,14 +238,3 @@ def require_totp(current_app):
         else:
             # User have enable otp on his account ?
             return has_otp_enabled()
-
-
-def admin_change_password(admin_password, user_login, user_password):
-    """
-    Try to change the requested user password
-    :param admin_password:
-    :param user_login:
-    :param user_password:
-    :return:
-    """
-    return False

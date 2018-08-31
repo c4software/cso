@@ -46,7 +46,7 @@ def password_renew():
         apps = request.args.get('apps', None)
         
         if old_password and new_password:
-            status, message = change_password(old_password, new_password)
+            status, message = change_password(old_password, new_password, None)
             if not status:
                 # Changing password failure
                 flash("Erreur lors du changement de mot de passe ({})".format(message))

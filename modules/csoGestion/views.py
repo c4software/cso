@@ -7,7 +7,7 @@ from modules.csoGestion.tools.generic import get_tbl_object, get_listing_redirec
 from models import UserDroit, Application
 from database import db_session
 
-from utils.user import admin_change_password
+from utils.user import change_password
 
 import pyotp
 
@@ -47,7 +47,7 @@ def logout():
     return render_template('disconnect.html')
 
 
-@csoGestion.route("/user/forceChangePassword")
+@csoGestion.route("/user/forceChangePassword", methods=['GET', 'POST'])
 @login_required
 def request_password_change():
     adminp = request.form.get('adminp', None)
@@ -55,12 +55,13 @@ def request_password_change():
     targetp = request.form.get('targetp', None)
 
     if adminp and targetl and targetp:
-        if admin_change_password(adminp, targetl, targetp):
-            flash("Changement de mot de passe réussi")
+        result, message = change_password(adminp, targetp, targetl)
+        if result:
+            flash("Le changement de mot de passe pour « {} » a bien été éffectué.".format(targetl))
         else:
-            flash("Changement du mot de passe impossible")
+            flash("Changement du mot de passe impossible ({})".format(message))
 
-        return redirect("/user/forceChangePassword")
+        return redirect("/admin/user/forceChangePassword")
 
 
     return render_template('requestPasswordChange.html')
