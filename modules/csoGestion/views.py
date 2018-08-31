@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, Blueprint, redirect, request, url_for
+from flask import render_template, Blueprint, redirect, request, url_for, flash
 from modules.csoGestion.tools.login import login_required, do_login, do_logout
 from modules.csoGestion.tools.generic import get_tbl_object, get_listing_redirection
 
 from models import UserDroit, Application
 from database import db_session
 
+from utils.user import admin_change_password
+
 import pyotp
+
 
 csoGestion = Blueprint('csoGestion', __name__, template_folder='templates')
 
@@ -47,6 +50,19 @@ def logout():
 @csoGestion.route("/user/forceChangePassword")
 @login_required
 def request_password_change():
+    adminp = request.form.get('adminp', None)
+    targetl = request.form.get('targetl', None)
+    targetp = request.form.get('targetp', None)
+
+    if adminp and targetl and targetp:
+        if admin_change_password(adminp, targetl, targetp):
+            flash("Changement de mot de passe réussi")
+        else:
+            flash("Changement du mot de passe impossible")
+
+        return redirect("/user/forceChangePassword")
+
+
     return render_template('requestPasswordChange.html')
 
 

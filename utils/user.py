@@ -232,4 +232,15 @@ def require_totp(current_app):
             return True
         else:
             # User have enable otp on his account ?
-            return has_otp_enabled()        
+            return has_otp_enabled()
+
+
+def admin_change_password(admin_password, user_login, user_password):
+    """
+    Try to change the requested user password
+    :param admin_password:
+    :param user_login:
+    :param user_password:
+    :return:
+    """
+    return False
