@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15fe6511-4254-447a-b330-b2a6355c922a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/modules/csoGestion/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/csoGestion/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/csoMain/templates/secret.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/CSO.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/CSO.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/csoMain/templates/me.html" beforeDir="false" afterPath="$PROJECT_DIR$/modules/csoMain/templates/me.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/csoMain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/csoMain/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/user.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,22 +32,26 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="150" />
+          <entry key="html" value="1268" />
+          <entry key="py" value="946" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="150" />
+          <entry key="HTML" value="1268" />
+          <entry key="Python" value="946" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="4" />
+          <entry key="html" value="6" />
+          <entry key="py" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="4" />
+          <entry key="HTML" value="6" />
+          <entry key="Python" value="8" />
         </counts>
       </usages-collector>
     </session>
@@ -52,91 +61,52 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/csoMain/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+            <state relative-caret-position="117">
+              <caret line="72" column="17" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
               <folding>
                 <element signature="e#25#91#1" />
+                <element signature="e#93#104#0" expanded="true" />
                 <element signature="e#729#968#0" />
                 <element signature="e#729#776#1" />
-                <element signature="e#1049#2500#0" />
-                <element signature="e#1049#1216#1" />
-                <element signature="e#1248#2438#0" />
-                <element signature="e#1521#2389#0" />
-                <element signature="e#1626#2007#0" />
-                <element signature="e#2042#2389#0" />
-                <element signature="e#2569#5325#0" />
-                <element signature="e#2569#2691#1" />
-                <element signature="e#3220#5078#0" />
-                <element signature="e#3449#3549#0" />
-                <element signature="e#3801#4426#0" />
-                <element signature="e#3915#4014#0" />
-                <element signature="e#4064#4180#0" />
-                <element signature="e#4215#4426#0" />
-                <element signature="e#4584#4727#0" />
-                <element signature="e#4754#5078#0" />
-                <element signature="e#5097#5325#0" />
-                <element signature="e#5405#6375#0" />
-                <element signature="e#5405#5447#1" />
-                <element signature="e#5802#6175#0" />
-                <element signature="e#5843#5968#0" />
-                <element signature="e#6012#6175#0" />
-                <element signature="e#6445#6730#0" />
-                <element signature="e#6445#6489#1" />
-                <element signature="e#6797#7137#0" />
-                <element signature="e#6797#6878#1" />
-                <element signature="e#7209#7436#0" />
-                <element signature="e#7209#7263#1" />
-                <element signature="e#7517#7689#0" />
-                <element signature="e#7517#7613#1" />
-                <element signature="e#7768#7937#0" />
-                <element signature="e#7768#7841#1" />
+                <element signature="e#1050#1217#1" />
+                <element signature="e#2043#2390#0" />
+                <element signature="e#2571#5327#0" />
+                <element signature="e#2571#2693#1" />
+                <element signature="e#3222#5080#0" />
+                <element signature="e#3451#3551#0" />
+                <element signature="e#3803#4428#0" />
+                <element signature="e#3917#4016#0" />
+                <element signature="e#4066#4182#0" />
+                <element signature="e#4217#4428#0" />
+                <element signature="e#4586#4729#0" />
+                <element signature="e#4756#5080#0" />
+                <element signature="e#5099#5327#0" />
+                <element signature="e#5407#6377#0" />
+                <element signature="e#5407#5449#1" />
+                <element signature="e#5804#6177#0" />
+                <element signature="e#5845#5970#0" />
+                <element signature="e#6014#6177#0" />
+                <element signature="e#6447#6732#0" />
+                <element signature="e#6447#6491#1" />
+                <element signature="e#6799#7139#0" />
+                <element signature="e#6799#6880#1" />
+                <element signature="e#7211#7438#0" />
+                <element signature="e#7211#7265#1" />
+                <element signature="e#7519#7691#0" />
+                <element signature="e#7519#7615#1" />
+                <element signature="e#7770#7939#0" />
+                <element signature="e#7770#7843#1" />
+                <marker date="1535706898255" expanded="true" signature="3165:3166" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modules/csoGestion/views.py">
+        <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/me.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
-              <folding>
-                <element signature="e#485#576#0" />
-                <element signature="e#485#522#1" />
-                <element signature="e#648#960#0" />
-                <element signature="e#648#684#1" />
-                <element signature="e#899#960#0" />
-                <element signature="e#1025#1118#0" />
-                <element signature="e#1025#1056#1" />
-                <element signature="e#1193#1522#0" />
-                <element signature="e#1193#1230#1" />
-                <element signature="e#1626#1915#0" />
-                <element signature="e#1626#1685#1" />
-                <element signature="e#2002#2216#0" />
-                <element signature="e#2088#2165#0" />
-                <element signature="e#2344#2796#0" />
-                <element signature="e#2344#2481#1" />
-                <element signature="e#2896#3324#0" />
-                <element signature="e#2896#2947#1" />
-                <element signature="e#3103#3268#0" />
-                <element signature="e#3409#3878#0" />
-                <element signature="e#3409#3448#1" />
-                <element signature="e#3466#3798#0" />
-                <element signature="e#3956#4513#0" />
-                <element signature="e#3956#4003#1" />
-                <element signature="e#4021#4433#0" />
-                <element signature="e#4618#5286#0" />
-                <element signature="e#4618#4672#1" />
-                <element signature="e#4690#5206#0" />
-                <element signature="e#5392#5960#0" />
-                <element signature="e#5392#5452#1" />
-                <element signature="e#5613#5765#0" />
-                <element signature="e#5806#5862#0" />
-                <element signature="e#6071#6194#0" />
-                <element signature="e#6071#6119#1" />
-                <element signature="e#6289#6585#0" />
-                <element signature="e#6289#6347#1" />
-              </folding>
+            <state relative-caret-position="406">
+              <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -144,65 +114,73 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/user.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="94" selection-start-line="94" selection-end-line="94" />
+            <state relative-caret-position="456">
+              <caret line="88" column="44" selection-start-line="88" selection-start-column="44" selection-end-line="88" selection-end-column="44" />
               <folding>
-                <element signature="e#415#443#0" />
-                <element signature="e#472#584#0" />
-                <element signature="e#639#1443#0" />
-                <element signature="e#730#1292#0" />
-                <element signature="e#812#883#0" />
-                <element signature="e#1077#1144#0" />
-                <element signature="e#1328#1443#0" />
-                <element signature="e#1484#1995#0" />
-                <element signature="e#1484#1646#1" />
-                <element signature="e#1678#1964#0" />
-                <element signature="e#1781#1867#0" />
-                <element signature="e#1894#1964#0" />
-                <element signature="e#2025#2381#0" />
-                <element signature="e#2025#2098#1" />
-                <element signature="e#2221#2325#0" />
-                <element signature="e#2344#2381#0" />
-                <element signature="e#2425#2504#1" />
-                <element signature="e#2842#2969#0" />
-                <element signature="e#3301#3525#0" />
-                <element signature="e#3301#3380#1" />
-                <element signature="e#3573#3614#1" />
-                <element signature="e#4609#4680#0" />
-                <element signature="e#4872#5065#0" />
-                <element signature="e#4872#4969#1" />
-                <element signature="e#5093#5393#0" />
-                <element signature="e#5093#5139#1" />
-                <element signature="e#5426#5961#0" />
-                <element signature="e#5674#5747#0" />
-                <element signature="e#5999#6471#0" />
-                <element signature="e#5999#6046#1" />
-                <element signature="e#6258#6471#0" />
-                <element signature="e#6387#6471#0" />
+                <element signature="e#0#12#0" expanded="true" />
+                <marker date="1535706805331" expanded="true" signature="3206:3209" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run.py">
+        <entry file="file://$PROJECT_DIR$/modules/csoGestion/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-290">
-              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            <state relative-caret-position="105">
+              <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-end-line="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py">
+        <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/totp.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/csoGestion/templates/formulaire.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="229" column="25" lean-forward="true" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
+            <state relative-caret-position="390">
+              <caret line="27" column="51" lean-forward="true" selection-end-line="60" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/secret.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="22" column="63" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" selection-start-line="12" selection-end-line="14" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/password.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>secret</find>
+      <find>pyot</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -210,10 +188,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modules/csoMain/views.py" />
         <option value="$PROJECT_DIR$/run.py" />
-        <option value="$PROJECT_DIR$/utils/user.py" />
         <option value="$PROJECT_DIR$/modules/csoGestion/views.py" />
+        <option value="$PROJECT_DIR$/modules/csoMain/templates/secret.html" />
+        <option value="$PROJECT_DIR$/utils/user.py" />
+        <option value="$PROJECT_DIR$/modules/csoMain/views.py" />
+        <option value="$PROJECT_DIR$/modules/csoMain/templates/me.html" />
       </list>
     </option>
   </component>
@@ -268,6 +248,13 @@
               <item name="CSO" type="b2602c69:ProjectViewProjectNode" />
               <item name="CSO" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="csoMain" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSO" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="csoNginx" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -283,12 +270,17 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="collaps&#9;ACTION&#9;CollapseAllRegions&#10;collapse&#9;ACTION&#9;CollapseAllRegions" />
+    <property name="SearchEverywhereHistoryKey" value="collaps&#9;ACTION&#9;CollapseAllRegions&#10;indent&#9;ACTION&#9;AutoIndentLines&#10;collapse&#9;ACTION&#9;CollapseAllRegions" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modules/csoMain/templates" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -383,132 +375,108 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/csoGestion/templates/formulaire.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="27" column="51" lean-forward="true" selection-end-line="60" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/totp.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="14" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/password.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/csoGestion/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/user.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="94" selection-start-line="94" selection-end-line="94" />
+        <state relative-caret-position="456">
+          <caret line="88" column="44" selection-start-line="88" selection-start-column="44" selection-end-line="88" selection-end-column="44" />
           <folding>
-            <element signature="e#415#443#0" />
-            <element signature="e#472#584#0" />
-            <element signature="e#639#1443#0" />
-            <element signature="e#730#1292#0" />
-            <element signature="e#812#883#0" />
-            <element signature="e#1077#1144#0" />
-            <element signature="e#1328#1443#0" />
-            <element signature="e#1484#1995#0" />
-            <element signature="e#1484#1646#1" />
-            <element signature="e#1678#1964#0" />
-            <element signature="e#1781#1867#0" />
-            <element signature="e#1894#1964#0" />
-            <element signature="e#2025#2381#0" />
-            <element signature="e#2025#2098#1" />
-            <element signature="e#2221#2325#0" />
-            <element signature="e#2344#2381#0" />
-            <element signature="e#2425#2504#1" />
-            <element signature="e#2842#2969#0" />
-            <element signature="e#3301#3525#0" />
-            <element signature="e#3301#3380#1" />
-            <element signature="e#3573#3614#1" />
-            <element signature="e#4609#4680#0" />
-            <element signature="e#4872#5065#0" />
-            <element signature="e#4872#4969#1" />
-            <element signature="e#5093#5393#0" />
-            <element signature="e#5093#5139#1" />
-            <element signature="e#5426#5961#0" />
-            <element signature="e#5674#5747#0" />
-            <element signature="e#5999#6471#0" />
-            <element signature="e#5999#6046#1" />
-            <element signature="e#6258#6471#0" />
-            <element signature="e#6387#6471#0" />
+            <element signature="e#0#12#0" expanded="true" />
+            <marker date="1535706805331" expanded="true" signature="3206:3209" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/csoMain/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+        <state relative-caret-position="117">
+          <caret line="72" column="17" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
           <folding>
             <element signature="e#25#91#1" />
+            <element signature="e#93#104#0" expanded="true" />
             <element signature="e#729#968#0" />
             <element signature="e#729#776#1" />
-            <element signature="e#1049#2500#0" />
-            <element signature="e#1049#1216#1" />
-            <element signature="e#1248#2438#0" />
-            <element signature="e#1521#2389#0" />
-            <element signature="e#1626#2007#0" />
-            <element signature="e#2042#2389#0" />
-            <element signature="e#2569#5325#0" />
-            <element signature="e#2569#2691#1" />
-            <element signature="e#3220#5078#0" />
-            <element signature="e#3449#3549#0" />
-            <element signature="e#3801#4426#0" />
-            <element signature="e#3915#4014#0" />
-            <element signature="e#4064#4180#0" />
-            <element signature="e#4215#4426#0" />
-            <element signature="e#4584#4727#0" />
-            <element signature="e#4754#5078#0" />
-            <element signature="e#5097#5325#0" />
-            <element signature="e#5405#6375#0" />
-            <element signature="e#5405#5447#1" />
-            <element signature="e#5802#6175#0" />
-            <element signature="e#5843#5968#0" />
-            <element signature="e#6012#6175#0" />
-            <element signature="e#6445#6730#0" />
-            <element signature="e#6445#6489#1" />
-            <element signature="e#6797#7137#0" />
-            <element signature="e#6797#6878#1" />
-            <element signature="e#7209#7436#0" />
-            <element signature="e#7209#7263#1" />
-            <element signature="e#7517#7689#0" />
-            <element signature="e#7517#7613#1" />
-            <element signature="e#7768#7937#0" />
-            <element signature="e#7768#7841#1" />
+            <element signature="e#1050#1217#1" />
+            <element signature="e#2043#2390#0" />
+            <element signature="e#2571#5327#0" />
+            <element signature="e#2571#2693#1" />
+            <element signature="e#3222#5080#0" />
+            <element signature="e#3451#3551#0" />
+            <element signature="e#3803#4428#0" />
+            <element signature="e#3917#4016#0" />
+            <element signature="e#4066#4182#0" />
+            <element signature="e#4217#4428#0" />
+            <element signature="e#4586#4729#0" />
+            <element signature="e#4756#5080#0" />
+            <element signature="e#5099#5327#0" />
+            <element signature="e#5407#6377#0" />
+            <element signature="e#5407#5449#1" />
+            <element signature="e#5804#6177#0" />
+            <element signature="e#5845#5970#0" />
+            <element signature="e#6014#6177#0" />
+            <element signature="e#6447#6732#0" />
+            <element signature="e#6447#6491#1" />
+            <element signature="e#6799#7139#0" />
+            <element signature="e#6799#6880#1" />
+            <element signature="e#7211#7438#0" />
+            <element signature="e#7211#7265#1" />
+            <element signature="e#7519#7691#0" />
+            <element signature="e#7519#7615#1" />
+            <element signature="e#7770#7939#0" />
+            <element signature="e#7770#7843#1" />
+            <marker date="1535706898255" expanded="true" signature="3165:3166" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/csoGestion/views.py">
+    <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/secret.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
-          <folding>
-            <element signature="e#485#576#0" />
-            <element signature="e#485#522#1" />
-            <element signature="e#648#960#0" />
-            <element signature="e#648#684#1" />
-            <element signature="e#899#960#0" />
-            <element signature="e#1025#1118#0" />
-            <element signature="e#1025#1056#1" />
-            <element signature="e#1193#1522#0" />
-            <element signature="e#1193#1230#1" />
-            <element signature="e#1626#1915#0" />
-            <element signature="e#1626#1685#1" />
-            <element signature="e#2002#2216#0" />
-            <element signature="e#2088#2165#0" />
-            <element signature="e#2344#2796#0" />
-            <element signature="e#2344#2481#1" />
-            <element signature="e#2896#3324#0" />
-            <element signature="e#2896#2947#1" />
-            <element signature="e#3103#3268#0" />
-            <element signature="e#3409#3878#0" />
-            <element signature="e#3409#3448#1" />
-            <element signature="e#3466#3798#0" />
-            <element signature="e#3956#4513#0" />
-            <element signature="e#3956#4003#1" />
-            <element signature="e#4021#4433#0" />
-            <element signature="e#4618#5286#0" />
-            <element signature="e#4618#4672#1" />
-            <element signature="e#4690#5206#0" />
-            <element signature="e#5392#5960#0" />
-            <element signature="e#5392#5452#1" />
-            <element signature="e#5613#5765#0" />
-            <element signature="e#5806#5862#0" />
-            <element signature="e#6071#6194#0" />
-            <element signature="e#6071#6119#1" />
-            <element signature="e#6289#6585#0" />
-            <element signature="e#6289#6347#1" />
-          </folding>
+        <state relative-caret-position="299">
+          <caret line="22" column="63" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/csoMain/templates/me.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
         </state>
       </provider>
     </entry>

@@ -14,6 +14,8 @@ from parameters import default_website, ldap_server, ldap_dn
 from models import UserDroit, Application
 from utils.app import get_app
 from utils.exceptions import PasswordToOldException
+from database import db_session
+
 
 
 def is_connected():
@@ -64,14 +66,46 @@ def check_totp(code, current_app):
 def is_opt_valid(code):
     """
     Function to check if the provided OTP code is a valid one
+    :param code:
+    :return: boolean
     """
     user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
     if user and user.secret:
         # If User exist and has a secret
-        totp = pyotp.TOTP(user.secret)
-        return totp.verify(code)
+        return validate_topt_secret(user.secret, code)
     else:
         # User not exist
+        return False
+
+
+def validate_topt_secret(secret, code):
+    """
+    Validate OTP Code with provided Secret
+    :param secret:
+    :param code:
+    :return: boolean
+    """
+    totp = pyotp.TOTP(secret)
+    return totp.verify(code.replace(" ", ""))
+
+
+def enable_user_2factor(secret):
+    """
+    Enable for the current user the 2Factor auth
+    :param secret:
+    :return:
+    """
+    if secret:
+        current_user = UserDroit.query.filter(UserDroit.username == session["username"]).first()
+        if current_user:
+            # If the user is present in the database
+            current_user.secret = secret
+            db_session.merge(current_user)
+            db_session.commit()
+            return True
+        else:
+            return False
+    else:
         return False
 
 

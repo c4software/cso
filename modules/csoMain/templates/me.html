@@ -38,9 +38,11 @@
     </div>
     <div class="card-body">
         {% if has_otp_enabled %}
-            <button type="button" class="btn btn-raised btn-warning">Désactiver l'OTP</button>
+            <div class="alert alert-info" role="alert">
+                La double authentification est active sur votre compte. Pour la modifier merci de vous rapprocher d'un administrateur.
+            </div>
         {% else %}
-            <button type="button" class="btn btn-raised btn-primary">Activer l'OTP</button>
+            <a type="/otp" class="btn btn-raised btn-primary">Activer l'OTP</a>
         {% endif %}
 
     </div>

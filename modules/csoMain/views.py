@@ -14,11 +14,12 @@ from flask import render_template, Blueprint, redirect, request, session, Respon
 import ldap
 from models import Application, UserDroit
 from parameters import default_website, ldap_server, ldap_dn
-from utils.user import has_otp_enabled, is_connected, check_totp, clear_session, ldap_login, signed_tab, require_totp, change_password
+from utils.user import has_otp_enabled, is_connected, check_totp, clear_session, ldap_login, signed_tab, require_totp, change_password, validate_topt_secret, enable_user_2factor
 from utils.app import get_app
 from utils.exceptions import PasswordToOldException
 
 csoMain = Blueprint('csoMain', __name__, template_folder='templates')
+
 
 @csoMain.route("/", methods=["GET", "POST"])
 def main():
@@ -66,6 +67,24 @@ def password_renew():
         return render_template("password.html")
     else:
         return redirect('/login?apps=admin&next=/')
+
+
+@csoMain.route("/otp", methods=["GET", "POST"])
+def enable_otp():
+    if is_connected():
+        secret = request.form.get('secret', None)
+        totp = request.form.get('totp', None)
+
+        if (secret is not None) and (totp is not None) and validate_topt_secret(secret, totp) and enable_user_2factor(secret):
+            redirect("/")
+        elif (secret is not None) and (totp is not None):
+            flash("Activation impossible, le code fourni est incorrect")
+            redirect("/otp")
+
+        return render_template("secret.html", secret=pyotp.random_base32())
+
+    else:
+        return redirect("/")
 
 
 @csoMain.route("/login", methods=["GET", "POST"])
