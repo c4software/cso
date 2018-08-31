@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15fe6511-4254-447a-b330-b2a6355c922a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/csoGestion/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/csoGestion/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,22 +27,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="138" />
+          <entry key="py" value="150" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="138" />
+          <entry key="Python" value="150" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="3" />
+          <entry key="py" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="3" />
+          <entry key="Python" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -53,7 +52,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/csoMain/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
+            <state relative-caret-position="198">
               <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
               <folding>
                 <element signature="e#25#91#1" />
@@ -97,6 +96,52 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/csoGestion/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="975">
+              <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
+              <folding>
+                <element signature="e#485#576#0" />
+                <element signature="e#485#522#1" />
+                <element signature="e#648#960#0" />
+                <element signature="e#648#684#1" />
+                <element signature="e#899#960#0" />
+                <element signature="e#1025#1118#0" />
+                <element signature="e#1025#1056#1" />
+                <element signature="e#1193#1522#0" />
+                <element signature="e#1193#1230#1" />
+                <element signature="e#1626#1915#0" />
+                <element signature="e#1626#1685#1" />
+                <element signature="e#2002#2216#0" />
+                <element signature="e#2088#2165#0" />
+                <element signature="e#2344#2796#0" />
+                <element signature="e#2344#2481#1" />
+                <element signature="e#2896#3324#0" />
+                <element signature="e#2896#2947#1" />
+                <element signature="e#3103#3268#0" />
+                <element signature="e#3409#3878#0" />
+                <element signature="e#3409#3448#1" />
+                <element signature="e#3466#3798#0" />
+                <element signature="e#3956#4513#0" />
+                <element signature="e#3956#4003#1" />
+                <element signature="e#4021#4433#0" />
+                <element signature="e#4618#5286#0" />
+                <element signature="e#4618#4672#1" />
+                <element signature="e#4690#5206#0" />
+                <element signature="e#5392#5960#0" />
+                <element signature="e#5392#5452#1" />
+                <element signature="e#5613#5765#0" />
+                <element signature="e#5806#5862#0" />
+                <element signature="e#6071#6194#0" />
+                <element signature="e#6071#6119#1" />
+                <element signature="e#6289#6585#0" />
+                <element signature="e#6289#6347#1" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/user.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="363">
@@ -168,6 +213,7 @@
         <option value="$PROJECT_DIR$/modules/csoMain/views.py" />
         <option value="$PROJECT_DIR$/run.py" />
         <option value="$PROJECT_DIR$/utils/user.py" />
+        <option value="$PROJECT_DIR$/modules/csoGestion/views.py" />
       </list>
     </option>
   </component>
@@ -203,7 +249,26 @@
               <item name="CSO" type="b2602c69:ProjectViewProjectNode" />
               <item name="CSO" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="csoGestion" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSO" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="csoGestion" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSO" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="csoMain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSO" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="csoNginx" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CSO" type="b2602c69:ProjectViewProjectNode" />
@@ -274,12 +339,12 @@
     <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19382322" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19382322" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32919255" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32919255" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39958593" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -288,7 +353,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32919255" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32919255" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32919255" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -308,50 +373,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="229" column="25" lean-forward="true" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/csoMain/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-          <folding>
-            <element signature="e#25#91#1" />
-            <element signature="e#729#968#0" />
-            <element signature="e#729#776#1" />
-            <element signature="e#1049#2500#0" />
-            <element signature="e#1049#1216#1" />
-            <element signature="e#1248#2438#0" />
-            <element signature="e#1521#2389#0" />
-            <element signature="e#1626#2007#0" />
-            <element signature="e#2042#2389#0" />
-            <element signature="e#2569#5325#0" />
-            <element signature="e#2569#2691#1" />
-            <element signature="e#3220#5078#0" />
-            <element signature="e#3449#3549#0" />
-            <element signature="e#3801#4426#0" />
-            <element signature="e#3915#4014#0" />
-            <element signature="e#4064#4180#0" />
-            <element signature="e#4215#4426#0" />
-            <element signature="e#4584#4727#0" />
-            <element signature="e#4754#5078#0" />
-            <element signature="e#5097#5325#0" />
-            <element signature="e#5405#6375#0" />
-            <element signature="e#5405#5447#1" />
-            <element signature="e#5802#6175#0" />
-            <element signature="e#5843#5968#0" />
-            <element signature="e#6012#6175#0" />
-            <element signature="e#6445#6730#0" />
-            <element signature="e#6445#6489#1" />
-            <element signature="e#6797#7137#0" />
-            <element signature="e#6797#6878#1" />
-            <element signature="e#7209#7436#0" />
-            <element signature="e#7209#7263#1" />
-            <element signature="e#7517#7689#0" />
-            <element signature="e#7517#7613#1" />
-            <element signature="e#7768#7937#0" />
-            <element signature="e#7768#7841#1" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -399,6 +420,94 @@
             <element signature="e#5999#6046#1" />
             <element signature="e#6258#6471#0" />
             <element signature="e#6387#6471#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/csoMain/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+          <folding>
+            <element signature="e#25#91#1" />
+            <element signature="e#729#968#0" />
+            <element signature="e#729#776#1" />
+            <element signature="e#1049#2500#0" />
+            <element signature="e#1049#1216#1" />
+            <element signature="e#1248#2438#0" />
+            <element signature="e#1521#2389#0" />
+            <element signature="e#1626#2007#0" />
+            <element signature="e#2042#2389#0" />
+            <element signature="e#2569#5325#0" />
+            <element signature="e#2569#2691#1" />
+            <element signature="e#3220#5078#0" />
+            <element signature="e#3449#3549#0" />
+            <element signature="e#3801#4426#0" />
+            <element signature="e#3915#4014#0" />
+            <element signature="e#4064#4180#0" />
+            <element signature="e#4215#4426#0" />
+            <element signature="e#4584#4727#0" />
+            <element signature="e#4754#5078#0" />
+            <element signature="e#5097#5325#0" />
+            <element signature="e#5405#6375#0" />
+            <element signature="e#5405#5447#1" />
+            <element signature="e#5802#6175#0" />
+            <element signature="e#5843#5968#0" />
+            <element signature="e#6012#6175#0" />
+            <element signature="e#6445#6730#0" />
+            <element signature="e#6445#6489#1" />
+            <element signature="e#6797#7137#0" />
+            <element signature="e#6797#6878#1" />
+            <element signature="e#7209#7436#0" />
+            <element signature="e#7209#7263#1" />
+            <element signature="e#7517#7689#0" />
+            <element signature="e#7517#7613#1" />
+            <element signature="e#7768#7937#0" />
+            <element signature="e#7768#7841#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/csoGestion/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="975">
+          <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
+          <folding>
+            <element signature="e#485#576#0" />
+            <element signature="e#485#522#1" />
+            <element signature="e#648#960#0" />
+            <element signature="e#648#684#1" />
+            <element signature="e#899#960#0" />
+            <element signature="e#1025#1118#0" />
+            <element signature="e#1025#1056#1" />
+            <element signature="e#1193#1522#0" />
+            <element signature="e#1193#1230#1" />
+            <element signature="e#1626#1915#0" />
+            <element signature="e#1626#1685#1" />
+            <element signature="e#2002#2216#0" />
+            <element signature="e#2088#2165#0" />
+            <element signature="e#2344#2796#0" />
+            <element signature="e#2344#2481#1" />
+            <element signature="e#2896#3324#0" />
+            <element signature="e#2896#2947#1" />
+            <element signature="e#3103#3268#0" />
+            <element signature="e#3409#3878#0" />
+            <element signature="e#3409#3448#1" />
+            <element signature="e#3466#3798#0" />
+            <element signature="e#3956#4513#0" />
+            <element signature="e#3956#4003#1" />
+            <element signature="e#4021#4433#0" />
+            <element signature="e#4618#5286#0" />
+            <element signature="e#4618#4672#1" />
+            <element signature="e#4690#5206#0" />
+            <element signature="e#5392#5960#0" />
+            <element signature="e#5392#5452#1" />
+            <element signature="e#5613#5765#0" />
+            <element signature="e#5806#5862#0" />
+            <element signature="e#6071#6194#0" />
+            <element signature="e#6071#6119#1" />
+            <element signature="e#6289#6585#0" />
+            <element signature="e#6289#6347#1" />
           </folding>
         </state>
       </provider>

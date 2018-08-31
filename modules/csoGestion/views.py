@@ -11,6 +11,7 @@ import pyotp
 
 csoGestion = Blueprint('csoGestion', __name__, template_folder='templates')
 
+
 @csoGestion.route("/")
 @login_required
 def index():
@@ -19,16 +20,19 @@ def index():
     """
     return redirect(get_listing_redirection("users"))
 
+
 @csoGestion.route("/login", methods=['GET', 'POST'])
 def login():
     """
     Do the login process
     """
-    if do_login(request.form.get('values', request.args.get('values', '')), request.form.get('signature', request.args.get('signature', ''))):
+    if do_login(request.form.get('values', request.args.get('values', '')),
+                request.form.get('signature', request.args.get('signature', ''))):
         return redirect(url_for('csoGestion.index'))
     else:
         do_logout()
         return render_template('disconnect.html')
+
 
 @csoGestion.route("/logout")
 @login_required
@@ -38,6 +42,7 @@ def logout():
     """
     do_logout()
     return render_template('disconnect.html')
+
 
 @csoGestion.route("/secret/list")
 @login_required
@@ -52,6 +57,7 @@ def list_secret():
                            action="secret",
                            key="username")
 
+
 @csoGestion.route("/secret/remove/<key>/confirm")
 @login_required
 def remove_secret_confirm(key):
@@ -63,6 +69,7 @@ def remove_secret_confirm(key):
                            key=key,
                            custom_message="Confirmer la suppression du secret de {0} ?".format(key))
 
+
 @csoGestion.route("/secret/remove/<key>")
 @login_required
 def removeSecret(key):
@@ -71,8 +78,9 @@ def removeSecret(key):
         user.secret = None
         db_session.merge(user)
         db_session.commit()
-        
+
     return redirect("/admin/secret/list")
+
 
 @csoGestion.route("/secret/add")
 @csoGestion.route("/secret/get/<username>")
@@ -87,6 +95,7 @@ def add_secret(username=""):
                            headers=["username", "qrcode_secret"],
                            action="secret", key="",
                            actionType="Sauvegarder")
+
 
 @csoGestion.route("/secret/save", methods=['POST', 'GET'])
 @login_required
@@ -104,6 +113,7 @@ def save_secret():
 
     return redirect(url_for("csoGestion.list_secret"))
 
+
 @csoGestion.route("/<tbl_name>/list")
 @login_required
 def list_data(tbl_name):
@@ -120,6 +130,7 @@ def list_data(tbl_name):
                                key=tbl_object.primary_key)
     except Exception as e:
         return redirect(url_for('csoGestion.index'))
+
 
 @csoGestion.route("/<tbl_name>/add")
 @login_required
@@ -139,6 +150,7 @@ def add(tbl_name):
     except Exception as e:
         return redirect(url_for('csoGestion.index'))
 
+
 @csoGestion.route("/<tbl_name>/get/<get_element>")
 @login_required
 def get(tbl_name, get_element):
@@ -147,7 +159,7 @@ def get(tbl_name, get_element):
     """
     try:
         tbl_object = get_tbl_object(tbl_name)
-        current = tbl_object.query.filter(tbl_object.primary_key+" == '"+get_element+"'").first()
+        current = tbl_object.query.filter(tbl_object.primary_key + " == '" + get_element + "'").first()
         return render_template('formulaire.html',
                                headers=tbl_object.header,
                                is_boolean=tbl_object.is_boolean,
@@ -185,6 +197,7 @@ def save(tbl_name):
 
     return redirect(get_listing_redirection(tbl_name))
 
+
 @csoGestion.route("/<tbl_name>/remove/<key>/confirm")
 @login_required
 def remove_confirm(key, tbl_name):
@@ -193,6 +206,7 @@ def remove_confirm(key, tbl_name):
     """
     return render_template('confirmation.html', tblName=tbl_name, key=key)
 
+
 @csoGestion.route("/<tbl_name>/remove/<key>")
 @login_required
 def remove(key, tbl_name):
@@ -200,7 +214,7 @@ def remove(key, tbl_name):
     Delete the <key> element in the <tbl_name>
     """
     tbl_object = get_tbl_object(tbl_name)
-    current = tbl_object.query.filter(tbl_object.primary_key+" == '"+key+"'").first()
+    current = tbl_object.query.filter(tbl_object.primary_key + " == '" + key + "'").first()
     db_session.delete(current)
     db_session.commit()
     return redirect(get_listing_redirection(tbl_name))
