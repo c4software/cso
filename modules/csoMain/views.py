@@ -71,15 +71,17 @@ def password_renew():
 
 @csoMain.route("/otp", methods=["GET", "POST"])
 def enable_otp():
-    if is_connected():
+    if has_otp_enabled():
+        return redirect("/")
+    elif is_connected():
         secret = request.form.get('secret', None)
         totp = request.form.get('totp', None)
 
         if (secret is not None) and (totp is not None) and validate_topt_secret(secret, totp) and enable_user_2factor(secret):
-            redirect("/")
+            return redirect("/")
         elif (secret is not None) and (totp is not None):
             flash("Activation impossible, le code fourni est incorrect")
-            redirect("/otp")
+            return redirect("/otp")
 
         return render_template("secret.html", secret=pyotp.random_base32())
 
