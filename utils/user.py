@@ -58,12 +58,8 @@ def check_totp(code, current_app):
     if is_connected():
         if is_opt_valid(code):
             return True
-        elif current_app.otp_required == 1:
-            # For this app the user should provide a valid code to access
-            return False
         else:
-            # User exist and don't have any secret falback
-            return True
+            return False
     else:
         return False
 
@@ -232,9 +228,4 @@ def require_totp(current_app):
     if "saved_computer" in session and session["saved_computer"] == "1":
         return False
     else:
-        # If current app required OTP return true
-        if current_app.otp_required:
-            return True
-        else:
-            # User have enable otp on his account ?
-            return has_otp_enabled()
+        return has_otp_enabled() or current_app.otp_required
