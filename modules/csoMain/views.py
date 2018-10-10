@@ -204,7 +204,7 @@ def is_login():
     Test if user is currently logged-in (Use jsonp to use avoid CORS)
     """
     callback = request.args.get('callback', "callback")
-    if is_connected:
+    if is_connected():
         resp = callback+"({\"data\":true})"
     else:
         resp = callback+"({\"data\":false})"
@@ -218,7 +218,7 @@ def logout():
     Display the logout request to the user
     """
     next_page = request.args.get('next', "")
-    if is_connected:
+    if is_connected():
         return redirect(next_page)
     else:
         return render_template("logout.html", next=next_page)
